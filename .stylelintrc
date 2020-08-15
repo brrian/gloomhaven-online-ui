@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-config-prettier"
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "declaration-empty-line-before": null,
+    "scss/at-rule-no-unknown": true
+  }
+}
