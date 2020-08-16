@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Session from './components/Session';
+import Session from './features/session/Session';
 
 const App: FC = () => {
   return <Session />;

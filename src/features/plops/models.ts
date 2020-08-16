@@ -1,7 +1,3 @@
-export interface Overlays {
-  [id: string]: Ploppable;
-}
-
 export type Ploppable = Tile;
 
 interface Tile extends PloppableBase {
@@ -14,11 +10,4 @@ interface PloppableBase extends Omit<Asset, 'id'> {
   rotation: number;
   x: number;
   y: number;
-}
-
-export interface Asset {
-  height: number;
-  id: string;
-  name: string;
-  width: number;
 }

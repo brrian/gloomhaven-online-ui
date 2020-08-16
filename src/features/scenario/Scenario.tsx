@@ -1,22 +1,25 @@
 import { sample } from 'lodash-es';
+import { observer } from 'mobx-react-lite';
 import React, { FC, useRef, useState, WheelEvent } from 'react';
 import { animated, config, to, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import assets from '../../assets.json';
-import Overlay from '../Overlay';
-import Plop from '../Plop';
-import Plopper from '../Plopper';
-import { Asset, Overlays, Ploppable } from './models';
-import styles from './styles.module.scss';
+import { useStore } from '../../store';
+import { Ploppable } from '../plops/models';
+import Plopper from '../plops/Plopper';
+import Plops from '../plops/Plops';
+import Asset from './Asset';
+import styles from './Scenario.module.scss';
 
-const Session: FC = () => {
+const Scenario: FC = () => {
   // Temporary start
-  const [overlays, setOverlays] = useState<Overlays>({});
-  const [plops, setPlops] = useState<Ploppable[]>([]);
-  const [plopper, setPlopper] = useState<Asset | undefined>();
+  const { plops, scenario } = useStore();
+
   const createRandomPlop = () => {
     const tile = sample(assets.tiles);
-    setPlopper(tile);
+    if (tile) {
+      plops.createPlopper(tile);
+    }
   };
   // Temporary end
 
@@ -70,7 +73,7 @@ const Session: FC = () => {
   };
 
   const handlePlop = (plop: Ploppable) => {
-    setPlops(prevPlops => [...prevPlops, plop]);
+    scenario.placeAsset(plop);
   };
 
   return (
@@ -78,28 +81,23 @@ const Session: FC = () => {
       <div style={{ position: 'absolute' }}>
         <button onClick={createRandomPlop}>Create tile</button>
       </div>
-      {plopper && (
+      {plops.activePlop && (
         <Plopper
-          asset={plopper}
           isDragging={isDragging}
           mapX={x.get()}
           mapY={y.get()}
           onPlop={handlePlop}
           scale={scale.get()}
-          tempSetOverlays={setOverlays}
-          tempSetPlopper={setPlopper}
         />
       )}
       <animated.div className={styles.map} style={{ scale, x, y }}>
-        {Object.values(overlays).map(overlay => (
-          <Overlay key={overlay.id} {...overlay} />
-        ))}
-        {plops.map(plop => (
-          <Plop key={plop.id} {...plop} />
+        <Plops />
+        {Object.values(scenario.assets).map(asset => (
+          <Asset key={asset.id} {...asset} />
         ))}
       </animated.div>
     </div>
   );
 };
 
-export default Session;
+export default observer(Scenario);

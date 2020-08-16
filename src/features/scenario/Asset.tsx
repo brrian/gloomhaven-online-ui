@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Ploppable } from '../Session/models';
+import { Ploppable } from '../plops/models';
 
-type PlopProps = Ploppable;
+type AssetProps = Ploppable;
 
-const Plop: FC<PlopProps> = ({ asset, name, rotation, type, x, y }) => {
+const Asset: FC<AssetProps> = ({ asset, name, rotation, type, x, y }) => {
   return (
     <img
       alt={name}
@@ -18,4 +18,4 @@ const Plop: FC<PlopProps> = ({ asset, name, rotation, type, x, y }) => {
   );
 };
 
-export default Plop;
+export default Asset;
