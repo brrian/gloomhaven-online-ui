@@ -1,0 +1,9 @@
+.overlay {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  user-select: none;
+}

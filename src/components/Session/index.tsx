@@ -1,9 +1,27 @@
-import React, { FC, useRef, WheelEvent } from 'react';
-import { animated, config, useSpring, to } from 'react-spring';
+import { sample } from 'lodash-es';
+import React, { FC, useRef, useState, WheelEvent } from 'react';
+import { animated, config, to, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+import assets from '../../assets.json';
+import Overlay from '../Overlay';
+import Plop from '../Plop';
+import Plopper from '../Plopper';
+import { Asset, Overlays, Ploppable } from './models';
 import styles from './styles.module.scss';
 
 const Session: FC = () => {
+  // Temporary start
+  const [overlays, setOverlays] = useState<Overlays>({});
+  const [plops, setPlops] = useState<Ploppable[]>([]);
+  const [plopper, setPlopper] = useState<Asset | undefined>();
+  const createRandomPlop = () => {
+    const tile = sample(assets.tiles);
+    setPlopper(tile);
+  };
+  // Temporary end
+
+  const [isDragging, setIsDragging] = useState(false);
+
   const mapInitialDragCoords = useRef([0, 0]);
 
   const [{ scale, x, y }, set] = useSpring(() => ({
@@ -14,8 +32,10 @@ const Session: FC = () => {
   }));
 
   const bind = useDrag(
-    ({ dragging, first, movement: [mx, my] }) => {
+    ({ dragging, first, last, movement: [mx, my] }) => {
       if (first) {
+        setIsDragging(dragging);
+
         to([x, y], (x, y) => {
           mapInitialDragCoords.current = [x, y];
         });
@@ -29,6 +49,12 @@ const Session: FC = () => {
           y: my + initialY,
         });
       }
+
+      if (last) {
+        setTimeout(() => {
+          setIsDragging(false);
+        }, 100);
+      }
     },
     { filterTaps: true }
   );
@@ -38,32 +64,39 @@ const Session: FC = () => {
     const newScale = scale.get() + zoomDelta;
 
     set({
-      scale: Math.min(Math.max(0.2, newScale), 1.5),
+      scale: Math.min(Math.max(0.2, newScale), 1),
       immediate: true,
     });
   };
 
+  const handlePlop = (plop: Ploppable) => {
+    setPlops(prevPlops => [...prevPlops, plop]);
+  };
+
   return (
     <div {...bind()} className={styles.session} onWheel={handleContainerWheel}>
-      <animated.div className={styles.map} style={{ x, y, scale }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          }}
-        >
-          hello
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            top: 20,
-            left: 100,
-          }}
-        >
-          world
-        </div>
+      <div style={{ position: 'absolute' }}>
+        <button onClick={createRandomPlop}>Create tile</button>
+      </div>
+      {plopper && (
+        <Plopper
+          asset={plopper}
+          isDragging={isDragging}
+          mapX={x.get()}
+          mapY={y.get()}
+          onPlop={handlePlop}
+          scale={scale.get()}
+          tempSetOverlays={setOverlays}
+          tempSetPlopper={setPlopper}
+        />
+      )}
+      <animated.div className={styles.map} style={{ scale, x, y }}>
+        {Object.values(overlays).map(overlay => (
+          <Overlay key={overlay.id} {...overlay} />
+        ))}
+        {plops.map(plop => (
+          <Plop key={plop.id} {...plop} />
+        ))}
       </animated.div>
     </div>
   );
