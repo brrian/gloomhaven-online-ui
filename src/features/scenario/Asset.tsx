@@ -7,7 +7,7 @@ const Asset: FC<AssetProps> = ({ asset, name, rotation, type, x, y }) => {
   return (
     <img
       alt={name}
-      src={`assets/${type}s/${asset}.png`}
+      src={`/assets/${type}s/${asset}.png`}
       style={{
         position: 'absolute',
         top: y,

@@ -1,11 +1,11 @@
 import { useLocalStore } from 'mobx-react-lite';
 import React, { createContext, FC, useContext } from 'react';
 import PlopsStore from './features/plops/plopsStore';
-import ScenarioStore from './features/scenario/scenarioStore';
+import SessionStore from './features/session/sessionStore';
 
 interface StoreContext {
   plops: PlopsStore;
-  scenario: ScenarioStore;
+  session: SessionStore;
 }
 
 const StoreContext = createContext<StoreContext | undefined>(undefined);
@@ -24,14 +24,14 @@ export const usePlopsStore = (): PlopsStore => {
   return useStore().plops;
 };
 
-export const useScenarioStore = (): ScenarioStore => {
-  return useStore().scenario;
+export const useSessionStore = (): SessionStore => {
+  return useStore().session;
 };
 
 export const StoreContextProvider: FC = ({ children }) => {
   const store = useLocalStore(() => ({
     plops: new PlopsStore(),
-    scenario: new ScenarioStore(),
+    session: new SessionStore(),
   }));
 
   return (

@@ -12,7 +12,7 @@ const Plop: FC<PlopProps> = ({ asset, rotation, name, type, x, y }) => {
         transform: `translate(${x}px, ${y}px) rotate(${rotation}deg)`,
       }}
     >
-      <img alt={name} src={`assets/${type}s/${asset}.png`} />
+      <img alt={name} src={`/assets/${type}s/${asset}.png`} />
     </div>
   );
 };

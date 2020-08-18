@@ -13,9 +13,9 @@ import styles from './Scenario.module.scss';
 
 const Scenario: FC = () => {
   // Temporary start
-  const { plops, scenario } = useStore();
+  const { plops, session } = useStore();
 
-  const createRandomPlop = () => {
+  const createRandomTile = () => {
     const tile = sample(assets.tiles);
     if (tile) {
       plops.createPlopper(tile);
@@ -73,13 +73,17 @@ const Scenario: FC = () => {
   };
 
   const handlePlop = (plop: Ploppable) => {
-    scenario.placeAsset(plop);
+    session.placeAsset(plop);
+  };
+
+  const handlePlopUpdate = (plop: Ploppable) => {
+    session.emitEvent('updatePlop', { plop });
   };
 
   return (
     <div {...bind()} className={styles.session} onWheel={handleContainerWheel}>
       <div style={{ position: 'absolute' }}>
-        <button onClick={createRandomPlop}>Create tile</button>
+        <button onClick={createRandomTile}>Create tile</button>
       </div>
       {plops.activePlop && (
         <Plopper
@@ -87,14 +91,16 @@ const Scenario: FC = () => {
           mapX={x.get()}
           mapY={y.get()}
           onPlop={handlePlop}
+          onPlopUpdate={handlePlopUpdate}
           scale={scale.get()}
         />
       )}
       <animated.div className={styles.map} style={{ scale, x, y }}>
         <Plops />
-        {Object.values(scenario.assets).map(asset => (
-          <Asset key={asset.id} {...asset} />
-        ))}
+        {session.scenario &&
+          Object.values(session.scenario.assets).map(asset => (
+            <Asset key={asset.id} {...asset} />
+          ))}
       </animated.div>
     </div>
   );

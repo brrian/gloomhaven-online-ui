@@ -1,8 +1,48 @@
-import React, { FC } from 'react';
-import Session from './features/session/Session';
+import { observer } from 'mobx-react-lite';
+import React, { FC, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { SESSION_PAGE } from './constants';
+import { SessionCreatedPayload } from './features/session/models';
+import { useSessionStore } from './store';
 
 const App: FC = () => {
-  return <Session />;
+  const history = useHistory();
+
+  const {
+    connection,
+    createSession,
+    initializeSession,
+    subscribe,
+    unsubscribe,
+  } = useSessionStore();
+
+  useEffect(() => {
+    const handleSessionCreated = (payload: SessionCreatedPayload) => {
+      initializeSession(payload);
+
+      history.push(`/${SESSION_PAGE}/${payload.id}`);
+    };
+
+    subscribe('sessionCreated', handleSessionCreated);
+
+    return () => {
+      unsubscribe('sessionCreated', handleSessionCreated);
+    };
+  }, [connection, history, initializeSession, subscribe, unsubscribe]);
+
+  const handleCreateClick = () => {
+    if (connection) {
+      return;
+    }
+
+    createSession();
+  };
+
+  return (
+    <div>
+      <button onClick={handleCreateClick}>Create session</button>
+    </div>
+  );
 };
 
-export default App;
+export default observer(App);

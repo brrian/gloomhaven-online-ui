@@ -8,7 +8,9 @@ interface PlopperProps {
   isDragging: boolean;
   mapX: number;
   mapY: number;
-  onPlop: (item: Ploppable) => void;
+  onPlop: (plop: Ploppable) => void;
+  onPlopDestroy?: (id: string) => void;
+  onPlopUpdate?: (plop: Ploppable) => void;
   scale: number;
 }
 
@@ -17,6 +19,8 @@ const Plopper: FC<PlopperProps> = ({
   mapX,
   mapY,
   onPlop,
+  onPlopDestroy,
+  onPlopUpdate,
   scale,
 }) => {
   const rotationIndexRef = useRef(0);
@@ -32,6 +36,8 @@ const Plopper: FC<PlopperProps> = ({
           updatePlop(activePlop.id, {
             rotation: (rotationIndexRef.current * 30) % 360,
           });
+
+          onPlopUpdate?.(activePlop);
         }
       }
     };
@@ -41,7 +47,7 @@ const Plopper: FC<PlopperProps> = ({
     return () => {
       document.body.removeEventListener('keydown', handleKeyDown);
     };
-  }, [activePlop, updatePlop]);
+  }, [activePlop, onPlopUpdate, updatePlop]);
 
   const handleMouseMove = ({
     clientX,
@@ -52,6 +58,8 @@ const Plopper: FC<PlopperProps> = ({
       const y = (clientY - mapY) / scale - activePlop.height / 2;
 
       updatePlop(activePlop.id, { x, y });
+
+      onPlopUpdate?.(activePlop);
     }
   };
 
@@ -60,6 +68,8 @@ const Plopper: FC<PlopperProps> = ({
       onPlop(activePlop);
 
       deletePlopById(activePlop.id);
+
+      onPlopDestroy?.(activePlop.id);
     }
   };
 

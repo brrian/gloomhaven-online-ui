@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React, { FC } from 'react';
 import { usePlopsStore } from '../../store';
 import Plop from './Plop';
@@ -14,4 +15,4 @@ const Plops: FC = () => {
   );
 };
 
-export default Plops;
+export default observer(Plops);
