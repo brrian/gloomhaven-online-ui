@@ -1,12 +1,19 @@
 import { Ploppable } from '../plops/models';
 
-export interface SessionCreatedPayload {
+export interface Assets {
+  [id: string]: Ploppable;
+}
+
+type Connection = string;
+
+export interface Session {
   id: string;
   scenario: Scenario;
 }
 
-interface Assets {
-  [id: string]: Ploppable;
+export interface JoinedSession {
+  session: Session;
+  connections: Connection[];
 }
 
 export type Scenario = {

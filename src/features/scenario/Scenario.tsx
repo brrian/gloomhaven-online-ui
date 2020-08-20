@@ -1,20 +1,21 @@
 import { sample } from 'lodash-es';
 import { observer } from 'mobx-react-lite';
-import React, { FC, useRef, useState, WheelEvent } from 'react';
-import { animated, config, to, useSpring } from 'react-spring';
-import { useDrag } from 'react-use-gesture';
+import React, { FC, useEffect } from 'react';
 import assets from '../../assets.json';
 import { useStore } from '../../store';
 import { Ploppable } from '../plops/models';
 import Plopper from '../plops/Plopper';
-import Plops from '../plops/Plops';
-import Asset from './Asset';
-import styles from './Scenario.module.scss';
+import { Scenario as IScenario } from '../session/models';
+import Map from './Map';
 
-const Scenario: FC = () => {
+interface ScenarioProps {
+  scenario: IScenario;
+}
+
+const Scenario: FC<ScenarioProps> = ({ scenario }) => {
+  const { peers, plops, session } = useStore();
+
   // Temporary start
-  const { plops, session } = useStore();
-
   const createRandomTile = () => {
     const tile = sample(assets.tiles);
     if (tile) {
@@ -23,86 +24,52 @@ const Scenario: FC = () => {
   };
   // Temporary end
 
-  const [isDragging, setIsDragging] = useState(false);
+  useEffect(() => {
+    const handleScenarioUpdated = (scenario: IScenario) => {
+      session.updateScenario(scenario);
+    };
 
-  const mapInitialDragCoords = useRef([0, 0]);
+    const handlePlopUpdated = (plop: Ploppable) => {
+      plops.updatePlop(plop.id, plop);
+    };
 
-  const [{ scale, x, y }, set] = useSpring(() => ({
-    config: config.stiff,
-    scale: 0.35,
-    x: 0,
-    y: 0,
-  }));
+    peers.subscribe('plopUpdated', handlePlopUpdated);
+    session.subscribe('scenarioUpdated', handleScenarioUpdated);
 
-  const bind = useDrag(
-    ({ dragging, first, last, movement: [mx, my] }) => {
-      if (first) {
-        setIsDragging(dragging);
-
-        to([x, y], (x, y) => {
-          mapInitialDragCoords.current = [x, y];
-        });
-      }
-
-      if (dragging) {
-        const [initialX, initialY] = mapInitialDragCoords.current;
-
-        set({
-          x: mx + initialX,
-          y: my + initialY,
-        });
-      }
-
-      if (last) {
-        setTimeout(() => {
-          setIsDragging(false);
-        }, 100);
-      }
-    },
-    { filterTaps: true }
-  );
-
-  const handleContainerWheel = ({ deltaY }: WheelEvent<HTMLDivElement>) => {
-    const zoomDelta = deltaY * 0.008;
-    const newScale = scale.get() + zoomDelta;
-
-    set({
-      scale: Math.min(Math.max(0.2, newScale), 1),
-      immediate: true,
-    });
-  };
+    return () => {
+      peers.unsubscribe('plopUpdated', handlePlopUpdated);
+      session.unsubscribe('scenarioUpdated', handleScenarioUpdated);
+    };
+  }, [peers, plops, session]);
 
   const handlePlop = (plop: Ploppable) => {
     session.placeAsset(plop);
   };
 
   const handlePlopUpdate = (plop: Ploppable) => {
-    session.emitEvent('updatePlop', { plop });
+    peers.emitEvent('plopUpdated', plop);
   };
 
   return (
-    <div {...bind()} className={styles.session} onWheel={handleContainerWheel}>
-      <div style={{ position: 'absolute' }}>
-        <button onClick={createRandomTile}>Create tile</button>
-      </div>
-      {plops.activePlop && (
-        <Plopper
-          isDragging={isDragging}
-          mapX={x.get()}
-          mapY={y.get()}
-          onPlop={handlePlop}
-          onPlopUpdate={handlePlopUpdate}
-          scale={scale.get()}
-        />
+    <Map assets={scenario.assets}>
+      {({ isDragging, scale, x, y }) => (
+        <>
+          <div style={{ position: 'absolute' }}>
+            <button onClick={createRandomTile}>Create tile</button>
+          </div>
+          {plops.activePlop && (
+            <Plopper
+              isDragging={isDragging}
+              mapX={x}
+              mapY={y}
+              onPlop={handlePlop}
+              onPlopUpdate={handlePlopUpdate}
+              scale={scale}
+            />
+          )}
+        </>
       )}
-      <animated.div className={styles.map} style={{ scale, x, y }}>
-        <Plops />
-        {session.scenario &&
-          Object.values(session.scenario.assets).map(asset => (
-            <Asset key={asset.id} {...asset} />
-          ))}
-      </animated.div>
-    </div>
+    </Map>
   );
 };
 

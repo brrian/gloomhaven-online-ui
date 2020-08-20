@@ -2,8 +2,9 @@ import { decorate, observable } from 'mobx';
 import { Ploppable } from '../plops/models';
 import {
   Handler,
+  JoinedSession,
   Scenario,
-  SessionCreatedPayload,
+  Session,
   Subscriptions,
 } from './models';
 
@@ -36,7 +37,7 @@ export default class SessionStore {
     );
   };
 
-  public initializeSession = (session: SessionCreatedPayload): void => {
+  public initializeSession = (session: Session): void => {
     this.id = session.id;
 
     this.scenario = session.scenario;
@@ -45,10 +46,8 @@ export default class SessionStore {
   public joinSessionById = async (sessionId: string): Promise<void> => {
     await this.createConnection();
 
-    const handleSessionJoined = (payload: any) => {
-      this.id = sessionId;
-
-      this.scenario = payload.scenario;
+    const handleSessionJoined = ({ session }: JoinedSession) => {
+      this.initializeSession(session);
 
       this.unsubscribe('sessionJoined', handleSessionJoined);
     };
@@ -62,7 +61,9 @@ export default class SessionStore {
     if (this.scenario) {
       this.scenario.assets[plop.id] = plop;
 
-      this.emitEvent('updateScenario', { scenario: this.scenario });
+      this.emitEvent('updateScenario', {
+        scenario: this.scenario,
+      });
     }
   };
 

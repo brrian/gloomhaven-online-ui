@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SESSION_PAGE } from './constants';
-import { SessionCreatedPayload } from './features/session/models';
+import { Session } from './features/session/models';
 import { useSessionStore } from './store';
 
 const App: FC = () => {
@@ -17,7 +17,7 @@ const App: FC = () => {
   } = useSessionStore();
 
   useEffect(() => {
-    const handleSessionCreated = (payload: SessionCreatedPayload) => {
+    const handleSessionCreated = (payload: Session) => {
       initializeSession(payload);
 
       history.push(`/${SESSION_PAGE}/${payload.id}`);
@@ -29,6 +29,10 @@ const App: FC = () => {
       unsubscribe('sessionCreated', handleSessionCreated);
     };
   }, [connection, history, initializeSession, subscribe, unsubscribe]);
+
+  useEffect(() => {
+    createSession();
+  }, [createSession]);
 
   const handleCreateClick = () => {
     if (connection) {

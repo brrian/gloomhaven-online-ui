@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useStore } from '../../store';
-import { Ploppable } from '../plops/models';
+import { SignalEvent } from '../peers/models';
 import Scenario from '../scenario/Scenario';
-import { Scenario as IScenario } from './models';
+import { JoinedSession } from './models';
 
 interface SessionRouteParams {
   id: string;
@@ -13,48 +13,68 @@ interface SessionRouteParams {
 const Session: FC = () => {
   const { id } = useParams<SessionRouteParams>();
 
-  const {
-    plops: { updatePlop },
-    session: {
-      joinSessionById,
-      scenario,
-      subscribe,
-      unsubscribe,
-      updateScenario,
-    },
-  } = useStore();
+  const { peers, session } = useStore();
 
   useEffect(() => {
-    const handlePlopUpdated = (plop: Ploppable) => {
-      updatePlop(plop.id, plop);
-    };
-
-    const handleScenarioUpdated = (scenario: IScenario) => {
-      updateScenario(scenario);
-    };
-
-    if (!scenario) {
-      joinSessionById(id);
-    } else {
-      subscribe('plopUpdated', handlePlopUpdated);
-      subscribe('scenarioUpdated', handleScenarioUpdated);
+    if (!session.scenario) {
+      session.joinSessionById(id);
     }
+  }, [id, session]);
+
+  useEffect(() => {
+    const handleSessionJoined = ({ connections }: JoinedSession) => {
+      for (const connection of connections) {
+        peers.createPeer(connection);
+      }
+    };
+
+    const handleSendSignalRequested = (event: SignalEvent) => {
+      session.emitEvent('sendSignal', event);
+    };
+
+    const handleReturnSignalRequested = (event: SignalEvent) => {
+      session.emitEvent('returnSignal', event);
+    };
+
+    peers.subscribe('returnSignalRequested', handleReturnSignalRequested);
+    peers.subscribe('sendSignalRequested', handleSendSignalRequested);
+
+    session.subscribe('returnSignalReceived', peers.onReturnSignalReceived);
+    session.subscribe('sessionJoined', handleSessionJoined);
+    session.subscribe('signalReceived', peers.onSignalReceived);
 
     return () => {
-      unsubscribe('plopUpdated', handlePlopUpdated);
-      unsubscribe('scenarioUpdated', handleScenarioUpdated);
-    };
-  }, [
-    id,
-    joinSessionById,
-    scenario,
-    subscribe,
-    unsubscribe,
-    updatePlop,
-    updateScenario,
-  ]);
+      peers.unsubscribe('returnSignalRequested', handleReturnSignalRequested);
+      peers.unsubscribe('sendSignalRequested', handleSendSignalRequested);
 
-  return scenario ? <Scenario /> : <div>no scenario</div>;
+      session.unsubscribe('returnSignalReceived', peers.onReturnSignalReceived);
+      session.unsubscribe('sessionJoined', handleSessionJoined);
+      session.unsubscribe('signalReceived', peers.onSignalReceived);
+    };
+  }, [peers, session]);
+
+  return session.scenario ? (
+    <div>
+      <ul
+        style={{
+          position: 'absolute',
+          top: 75,
+          zIndex: 1000,
+        }}
+      >
+        {peers.peerConnections.map(peer => (
+          <li key={peer.connectionId}>{peer.connectionId}</li>
+        ))}
+      </ul>
+      <Scenario scenario={session.scenario} />
+    </div>
+  ) : (
+    <div>
+      no scenario
+      <br />
+      <Link to="/">Create session</Link>
+    </div>
+  );
 };
 
 export default observer(Session);
