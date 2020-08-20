@@ -36,12 +36,23 @@ const Session: FC = () => {
       session.emitEvent('returnSignal', event);
     };
 
+    const handleUserLeft = (connectionId: string) => {
+      peers.removePeer(connectionId);
+    };
+
+    const handleWindowUnload = () => {
+      session.emitEvent('leaveSession', { sessionId: id });
+    };
+
     peers.subscribe('returnSignalRequested', handleReturnSignalRequested);
     peers.subscribe('sendSignalRequested', handleSendSignalRequested);
 
     session.subscribe('returnSignalReceived', peers.onReturnSignalReceived);
     session.subscribe('sessionJoined', handleSessionJoined);
     session.subscribe('signalReceived', peers.onSignalReceived);
+    session.subscribe('userLeft', handleUserLeft);
+
+    window.addEventListener('beforeunload', handleWindowUnload);
 
     return () => {
       peers.unsubscribe('returnSignalRequested', handleReturnSignalRequested);
@@ -50,6 +61,9 @@ const Session: FC = () => {
       session.unsubscribe('returnSignalReceived', peers.onReturnSignalReceived);
       session.unsubscribe('sessionJoined', handleSessionJoined);
       session.unsubscribe('signalReceived', peers.onSignalReceived);
+      session.unsubscribe('userLeft', handleUserLeft);
+
+      window.removeEventListener('beforeunload', handleWindowUnload);
     };
   }, [peers, session]);
 

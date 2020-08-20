@@ -55,6 +55,12 @@ export default class PeersStore {
     this.addPeer(connectionId, signal);
   };
 
+  public removePeer = (connectionId: string): void => {
+    this.peerConnections = this.peerConnections.filter(
+      peerConnection => peerConnection.connectionId !== connectionId
+    );
+  };
+
   public subscribe = (action: string, handler: Handler): void => {
     if (!this.subscriptions[action]) {
       this.subscriptions[action] = [];
