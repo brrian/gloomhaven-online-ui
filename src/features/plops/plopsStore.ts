@@ -1,7 +1,8 @@
 import { decorate, observable } from 'mobx';
 import { v4 as uuid } from 'uuid';
 import assets from '../../assets.json';
-import { AssetType, Ploppable } from './models';
+import { AssetType } from '../session/models';
+import { Ploppable } from './models';
 
 interface Plops {
   [id: string]: Ploppable;
@@ -31,6 +32,7 @@ export default class PlopsStore {
       ...asset,
       assetId: asset.id,
       id,
+      inTransit: true,
       rotation: 0,
       type,
       x: 0,

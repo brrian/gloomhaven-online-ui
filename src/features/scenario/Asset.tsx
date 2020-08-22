@@ -1,10 +1,17 @@
+import cc from 'classcat';
 import React, { FC } from 'react';
-import { Ploppable } from '../plops/models';
+import { Asset as IAsset } from '../session/models';
 import styles from './Asset.module.scss';
 
-type AssetProps = Ploppable;
+interface AssetProps {
+  asset: IAsset;
+  className?: string;
+  onDoubleClick?: (asset: IAsset) => void;
+}
 
-const Asset: FC<AssetProps> = ({ assetId, name, rotation, type, x, y }) => {
+const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
+  const { assetId, name, rotation, type, x, y } = asset;
+
   let orientation = '';
   if (type === 'monsters') {
     orientation = rotation % 60 === 0 ? '-h' : '-v';
@@ -18,7 +25,12 @@ const Asset: FC<AssetProps> = ({ assetId, name, rotation, type, x, y }) => {
   }
 
   return (
-    <div className={styles.asset} data-type={type} style={{ transform }}>
+    <div
+      className={cc([styles.asset, className])}
+      data-type={type}
+      onDoubleClick={onDoubleClick ? () => onDoubleClick(asset) : undefined}
+      style={{ transform }}
+    >
       <img alt={name} src={`/assets/${type}/${assetId}${orientation}.png`} />
     </div>
   );

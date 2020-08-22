@@ -1,8 +1,21 @@
-import { Ploppable } from '../plops/models';
-
 export interface Assets {
-  [id: string]: Ploppable;
+  [id: string]: Asset;
 }
+
+export interface Asset {
+  assetId: string;
+  height: number;
+  id: string;
+  inTransit: boolean;
+  name: string;
+  rotation: number;
+  type: AssetType;
+  width: number;
+  x: number;
+  y: number;
+}
+
+export type AssetType = 'monsters' | 'tiles';
 
 type Connection = string;
 

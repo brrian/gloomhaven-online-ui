@@ -1,9 +1,10 @@
+import cc from 'classcat';
 import { observer } from 'mobx-react-lite';
 import React, { FC, ReactNode, useRef, useState, WheelEvent } from 'react';
 import { animated, config, to, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import Plops from '../plops/Plops';
-import { Assets } from '../session/models';
+import { Asset as IAsset, Assets } from '../session/models';
 import Asset from './Asset';
 import styles from './Map.module.scss';
 
@@ -17,9 +18,10 @@ interface MapRenderProps {
 interface MapProps {
   assets: Assets;
   children: (props: MapRenderProps) => ReactNode;
+  onAssetMove: (asset: IAsset) => void;
 }
 
-const Map: FC<MapProps> = ({ assets, children }) => {
+const Map: FC<MapProps> = ({ assets, children, onAssetMove }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const mapInitialDragCoords = useRef([0, 0]);
@@ -84,7 +86,15 @@ const Map: FC<MapProps> = ({ assets, children }) => {
       <animated.div className={styles.map} style={{ scale, x, y }}>
         <Plops />
         {Object.values(assets).map(asset => (
-          <Asset key={asset.id} {...asset} />
+          <Asset
+            asset={asset}
+            className={cc({
+              [styles.asset]: true,
+              [styles.inTransit]: asset.inTransit,
+            })}
+            key={asset.id}
+            onDoubleClick={onAssetMove}
+          />
         ))}
       </animated.div>
     </div>

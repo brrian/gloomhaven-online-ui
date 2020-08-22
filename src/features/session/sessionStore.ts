@@ -59,7 +59,14 @@ export default class SessionStore {
 
   public placeAsset = (plop: Ploppable): void => {
     if (this.scenario) {
-      this.scenario.assets[plop.id] = plop;
+      this.scenario.assets[plop.id] = {
+        ...plop,
+        inTransit: false,
+      };
+
+      if (plop.clonedFromAsset) {
+        delete this.scenario.assets[plop.clonedFromAsset];
+      }
 
       this.emitEvent('updateScenario', {
         scenario: this.scenario,
@@ -73,6 +80,19 @@ export default class SessionStore {
     }
 
     this.subscriptions[action].push(handler);
+  };
+
+  public updateAsset = (id: string, updates: Partial<Ploppable>): void => {
+    if (this.scenario) {
+      this.scenario.assets[id] = {
+        ...this.scenario.assets[id],
+        ...updates,
+      };
+
+      this.emitEvent('updateScenario', {
+        scenario: this.scenario,
+      });
+    }
   };
 
   public unsubscribe = (action: string, handler: Handler): void => {

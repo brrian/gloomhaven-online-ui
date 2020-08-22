@@ -5,7 +5,7 @@ import assets from '../../assets.json';
 import { useStore } from '../../store';
 import { Ploppable } from '../plops/models';
 import Plopper from '../plops/Plopper';
-import { Scenario as IScenario } from '../session/models';
+import { Asset, Scenario as IScenario } from '../session/models';
 import Map from './Map';
 
 interface ScenarioProps {
@@ -49,6 +49,19 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     };
   }, [peers, plops, session]);
 
+  const handleAssetMove = ({ assetId, id, rotation, type, x, y }: Asset) => {
+    session.updateAsset(id, {
+      inTransit: true,
+    });
+
+    plops.createPlopper(type, assetId, {
+      clonedFromAsset: id,
+      x,
+      y,
+      rotation,
+    });
+  };
+
   const handlePlop = (plop: Ploppable) => {
     session.placeAsset(plop);
   };
@@ -58,7 +71,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
   };
 
   return (
-    <Map assets={scenario.assets}>
+    <Map assets={scenario.assets} onAssetMove={handleAssetMove}>
       {({ isDragging, scale, x, y }) => (
         <>
           <div style={{ position: 'absolute' }}>
