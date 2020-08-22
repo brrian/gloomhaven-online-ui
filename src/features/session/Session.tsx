@@ -65,7 +65,7 @@ const Session: FC = () => {
 
       window.removeEventListener('beforeunload', handleWindowUnload);
     };
-  }, [peers, session]);
+  }, [id, peers, session]);
 
   return session.scenario ? (
     <div>

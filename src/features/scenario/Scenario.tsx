@@ -19,7 +19,14 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
   const createRandomTile = () => {
     const tile = sample(assets.tiles);
     if (tile) {
-      plops.createPlopper(tile);
+      plops.createPlopper('tiles', tile.id);
+    }
+  };
+
+  const createRandomMonster = () => {
+    const monster = sample(assets.monsters);
+    if (monster) {
+      plops.createPlopper('monsters', monster.id);
     }
   };
   // Temporary end
@@ -56,6 +63,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
         <>
           <div style={{ position: 'absolute' }}>
             <button onClick={createRandomTile}>Create tile</button>
+            <button onClick={createRandomMonster}>Create monster</button>
           </div>
           {plops.activePlop && (
             <Plopper

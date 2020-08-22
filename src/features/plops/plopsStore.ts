@@ -1,6 +1,7 @@
 import { decorate, observable } from 'mobx';
 import { v4 as uuid } from 'uuid';
-import { Ploppable } from './models';
+import assets from '../../assets.json';
+import { AssetType, Ploppable } from './models';
 
 interface Plops {
   [id: string]: Ploppable;
@@ -11,17 +12,30 @@ export default class PlopsStore {
 
   public plops: Plops = {};
 
-  public createPlopper = (asset: Asset): void => {
+  public createPlopper = (
+    type: AssetType,
+    assetId: string,
+    initialProps?: Partial<Ploppable>
+  ): void => {
     const id = uuid();
+
+    const asset = assets[type].find(asset => asset.id === assetId);
+
+    if (!asset) {
+      throw new Error(
+        `Unable to find asset with type "${type}" and id "${assetId}"`
+      );
+    }
 
     const plop: Ploppable = {
       ...asset,
-      asset: asset.id,
+      assetId: asset.id,
       id,
       rotation: 0,
-      type: 'tile',
+      type,
       x: 0,
       y: 0,
+      ...initialProps,
     };
 
     this.activePlop = plop;
