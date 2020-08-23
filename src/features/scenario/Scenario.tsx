@@ -1,12 +1,12 @@
-import { sample } from 'lodash-es';
 import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
-import assets from '../../assets.json';
 import { useStore } from '../../store';
 import { Ploppable } from '../plops/models';
 import Plopper from '../plops/Plopper';
+import PlopSelector from '../plops/PlopSelector';
 import { Asset, Scenario as IScenario } from '../session/models';
 import Map from './Map';
+import styles from './Scenario.module.scss';
 
 interface ScenarioProps {
   scenario: IScenario;
@@ -14,29 +14,6 @@ interface ScenarioProps {
 
 const Scenario: FC<ScenarioProps> = ({ scenario }) => {
   const { peers, plops, session } = useStore();
-
-  // Temporary start
-  const createRandomTile = () => {
-    const tile = sample(assets.tiles);
-    if (tile) {
-      plops.createPlopper('tiles', tile.id);
-    }
-  };
-
-  const createRandomMonster = () => {
-    const monster = sample(assets.monsters);
-    if (monster) {
-      plops.createPlopper('monsters', monster.id);
-    }
-  };
-
-  const createRandomToken = () => {
-    const token = sample(assets.tokens);
-    if (token) {
-      plops.createPlopper('tokens', token.id);
-    }
-  };
-  // Temporary end
 
   useEffect(() => {
     const handleScenarioUpdated = (scenario: IScenario) => {
@@ -91,10 +68,10 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     <Map assets={scenario.assets} onAssetMove={handleAssetMove}>
       {({ isDragging, scale, x, y }) => (
         <>
-          <div style={{ position: 'absolute' }}>
-            <button onClick={createRandomTile}>Create tile</button>
-            <button onClick={createRandomMonster}>Create monster</button>
-            <button onClick={createRandomToken}>Create token</button>
+          <div className={styles.ploppers}>
+            <PlopSelector className={styles.select} type="tiles" />
+            <PlopSelector className={styles.select} type="monsters" />
+            <PlopSelector className={styles.select} type="tokens" />
           </div>
           {plops.activePlop && (
             <Plopper

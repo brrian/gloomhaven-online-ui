@@ -1,0 +1,14 @@
+.ploppers {
+  position: absolute;
+  z-index: 1000;
+  padding: 8px;
+
+  .select {
+    display: inline-block;
+    margin-right: 24px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
