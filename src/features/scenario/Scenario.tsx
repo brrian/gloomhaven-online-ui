@@ -29,6 +29,13 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
       plops.createPlopper('monsters', monster.id);
     }
   };
+
+  const createRandomToken = () => {
+    const token = sample(assets.tokens);
+    if (token) {
+      plops.createPlopper('tokens', token.id);
+    }
+  };
   // Temporary end
 
   useEffect(() => {
@@ -87,6 +94,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
           <div style={{ position: 'absolute' }}>
             <button onClick={createRandomTile}>Create tile</button>
             <button onClick={createRandomMonster}>Create monster</button>
+            <button onClick={createRandomToken}>Create token</button>
           </div>
           {plops.activePlop && (
             <Plopper

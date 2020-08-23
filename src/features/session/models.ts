@@ -15,7 +15,7 @@ export interface Asset {
   y: number;
 }
 
-export type AssetType = 'monsters' | 'tiles';
+export type AssetType = 'monsters' | 'tiles' | 'tokens';
 
 type Connection = string;
 

@@ -256,29 +256,25 @@
       "id": "j1a",
       "name": "j1a",
       "width": 1463,
-      "height": 1865,
-      "isHorizontal": true
+      "height": 1865
     },
     {
       "id": "j1b",
       "name": "j1b",
       "width": 1463,
-      "height": 1865,
-      "isHorizontal": true
+      "height": 1865
     },
     {
       "id": "j2a",
       "name": "j2a",
       "width": 1463,
-      "height": 1865,
-      "isHorizontal": true
+      "height": 1865
     },
     {
       "id": "j2b",
       "name": "j2b",
       "width": 1463,
-      "height": 1865,
-      "isHorizontal": true
+      "height": 1865
     },
     {
       "id": "k1a",
@@ -519,257 +515,394 @@
   ],
   "tokens": [
     {
-      "id": "altar",
-      "name": "Altar"
-    },
-    {
       "id": "altar-h",
       "name": "Altar (Horizontal)",
-      "isHorizontal": true
+      "width": 230,
+      "height": 238
+    },
+    {
+      "id": "altar",
+      "name": "Altar",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "barrel",
-      "name": "Barrel"
+      "name": "Barrel",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "bear-trap",
-      "name": "Bear Trap"
+      "name": "Bear Trap",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "bookcase-2h",
-      "name": "Bookcase (2 hexes)",
-      "hexes": 2
+      "name": "Bookcase (2 Hexes)",
+      "width": 398,
+      "height": 230
     },
     {
       "id": "boulder-2h",
-      "name": "Boulder (2 hexes)",
-      "hexes": 2
+      "name": "Boulder (2 Hexes)",
+      "width": 398,
+      "height": 230
+    },
+    {
+      "id": "boulder-3h",
+      "name": "Boulder (3 Hexes)",
+      "width": 404,
+      "height": 400
+    },
+    {
+      "id": "boulder",
+      "name": "Boulder",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "bush",
-      "name": "Bush"
+      "name": "Bush",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "cabinet",
-      "name": "Cabinet"
+      "name": "Cabinet",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "coin",
-      "name": "Coin"
+      "name": "Coin",
+      "width": 230,
+      "height": 230
     },
     {
       "id": "corridor-earth-2h",
-      "name": "Corridor Earth (2 hexes)",
-      "hexes": 2
+      "name": "Corridor Earth (2 Hexes)",
+      "width": 371,
+      "height": 230
+    },
+    {
+      "id": "corridor-earth",
+      "name": "Corridor Earth",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "corridor-nat-stone-2h",
-      "name": "Corridor Nat Stone (2 hexes)",
-      "hexes": 2
+      "name": "Corridor Nat Stone (2 Hexes)",
+      "width": 371,
+      "height": 230
+    },
+    {
+      "id": "corridor-nat-stone",
+      "name": "Corridor Nat Stone",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "corridor-stone-2h",
-      "name": "Corridor Stone (2 hexes)",
-      "hexes": 2
+      "name": "Corridor Stone (2 Hexes)",
+      "width": 371,
+      "height": 230
+    },
+    {
+      "id": "corridor-stone",
+      "name": "Corridor Stone",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "corridor-wood-2h",
-      "name": "Corridor Wood (2 hexes)",
-      "hexes": 2
+      "name": "Corridor Wood (2 Hexes)",
+      "width": 371,
+      "height": 230
+    },
+    {
+      "id": "corridor-wood",
+      "name": "Corridor Wood",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "crate",
-      "name": "Crate"
+      "name": "Crate",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "crystal",
-      "name": "Crystal"
+      "name": "Crystal",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "dark-fog",
-      "name": "Dark Fog"
+      "name": "Dark Fog",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "dark-pit-2h",
-      "name": "Dark Pit (2 hexes)",
-      "hexes": 2
+      "name": "Dark Pit (2 Hexes)",
+      "width": 376,
+      "height": 230
     },
     {
       "id": "fountain",
-      "name": "Fountain"
+      "name": "Fountain",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "hot-coals",
-      "name": "Hot Coals"
+      "name": "Hot Coals",
+      "width": 213,
+      "height": 230
     },
     {
       "id": "light-fog",
-      "name": "Light Fog"
+      "name": "Light Fog",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "log-2h",
-      "name": "Log (2 hexes)",
-      "hexes": 2
+      "name": "Log (2 Hexes)",
+      "width": 371,
+      "height": 230
     },
     {
       "id": "nest",
-      "name": "Nest"
+      "name": "Nest",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "poison-gas",
-      "name": "Poison Gas"
+      "name": "Poison Gas",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "pressure-plate",
-      "name": "Pressure Plate"
+      "name": "Pressure Plate",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "rock-column",
-      "name": "Rock Column"
+      "name": "Rock Column",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "rubble",
-      "name": "Rubble"
+      "name": "Rubble",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "sarcophagus-2h",
-      "name": "Sarcophagus (2 hexes)",
-      "hexes": 2
+      "name": "Sarcophagus (2 Hexes)",
+      "width": 398,
+      "height": 230
     },
     {
       "id": "scenario-1",
       "name": "Scenario 1",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-2",
       "name": "Scenario 2",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-3",
       "name": "Scenario 3",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-4",
       "name": "Scenario 4",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-5",
       "name": "Scenario 5",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-a",
       "name": "Scenario A",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-b",
       "name": "Scenario B",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-c",
       "name": "Scenario C",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-d",
       "name": "Scenario D",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "scenario-e",
       "name": "Scenario E",
-      "canOverlay": true
+      "width": 204,
+      "height": 230
     },
     {
       "id": "shelf-2h",
-      "name": "Shelf (2 hexes)",
-      "hexes": 2
+      "name": "Shelf (2 Hexes)",
+      "width": 398,
+      "height": 230
     },
     {
       "id": "spike-trap",
-      "name": "Spike Trap"
+      "name": "Spike Trap",
+      "width": 206,
+      "height": 230
+    },
+    {
+      "id": "stairs-v",
+      "name": "Stairs V",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "stairs",
-      "name": "Stairs"
-    },
-    {
-      "id": "stairs-h",
-      "name": "Stairs (Horizontal)"
+      "name": "Stairs",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "stalagmites",
-      "name": "Stalagmites"
+      "name": "Stalagmites",
+      "width": 204,
+      "height": 230
+    },
+    {
+      "id": "start-hex-h",
+      "name": "Start Hex (Horizontal)",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "start-hex",
-      "name": "Start Hex"
-    },
-    {
-      "id": "stone-door",
-      "name": "Stone Door"
+      "name": "Start Hex",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "stone-door-h",
-      "name": "Stone Door (Horizontal)"
+      "name": "Stone Door (Horizontal)",
+      "width": 204,
+      "height": 230
+    },
+    {
+      "id": "stone-door",
+      "name": "Stone Door",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "stone-pillar",
-      "name": "Stone Pillar"
+      "name": "Stone Pillar",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "stump",
-      "name": "Stump"
+      "name": "Stump",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "table-2h",
-      "name": "Table (2 hexes)",
-      "hexes": 2
+      "name": "Table (2 Hexes)",
+      "width": 398,
+      "height": 230
     },
     {
       "id": "thorns",
-      "name": "Thorns"
+      "name": "Thorns",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "totem",
-      "name": "Totem"
-    },
-    {
-      "id": "treasure",
-      "name": "Treasure"
+      "name": "Totem",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "treasure-h",
       "name": "Treasure (Horizontal)",
-      "isHorizontal": true
+      "width": 230,
+      "height": 196
+    },
+    {
+      "id": "treasure",
+      "name": "Treasure",
+      "width": 206,
+      "height": 230
     },
     {
       "id": "tree-3h",
-      "name": "Tree (3 hexes)",
-      "hexes": 3
+      "name": "Tree (3 Hexes)",
+      "width": 393,
+      "height": 400
     },
     {
       "id": "wall-section-2h",
-      "name": "Wall Section (2 hexes)",
-      "hexes": 2
+      "name": "Wall Section (2 Hexes)",
+      "width": 371,
+      "height": 230
     },
     {
       "id": "water",
-      "name": "Water"
+      "name": "Water",
+      "width": 204,
+      "height": 230
+    },
+    {
+      "id": "wood-door-closed-v",
+      "name": "Wood Door Closed V",
+      "width": 204,
+      "height": 230
     },
     {
       "id": "wood-door-closed",
-      "name": "Wood Door"
+      "name": "Wood Door Closed",
+      "width": 204,
+      "height": 230
     },
     {
-      "id": "wood-door-closed-h",
-      "name": "Wood Door (Horizontal)"
+      "id": "wood-door-opened",
+      "name": "Wood Door Opened",
+      "width": 204,
+      "height": 230
     }
   ]
 }
