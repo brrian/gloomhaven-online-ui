@@ -25,7 +25,7 @@ const Plopper: FC<PlopperProps> = ({
 }) => {
   const rotationIndexRef = useRef(0);
 
-  const { activePlop, deletePlopById, updatePlop } = usePlopsStore();
+  const { activePlop, destroyPlop, updatePlop } = usePlopsStore();
 
   useEffect(() => {
     const handleKeyDown = ({ key }: KeyboardEvent) => {
@@ -67,7 +67,7 @@ const Plopper: FC<PlopperProps> = ({
     if (!isDragging && activePlop) {
       onPlop(activePlop);
 
-      deletePlopById(activePlop.id);
+      destroyPlop(activePlop.id);
 
       onPlopDestroy?.(activePlop.id);
     }

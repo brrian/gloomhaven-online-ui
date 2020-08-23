@@ -36,14 +36,20 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
       session.updateScenario(scenario);
     };
 
+    const handlePlopDestroyed = (id: string) => {
+      plops.destroyPlop(id);
+    };
+
     const handlePlopUpdated = (plop: Ploppable) => {
       plops.updatePlop(plop.id, plop);
     };
 
+    peers.subscribe('plopDestroyed', handlePlopDestroyed);
     peers.subscribe('plopUpdated', handlePlopUpdated);
     session.subscribe('scenarioUpdated', handleScenarioUpdated);
 
     return () => {
+      peers.unsubscribe('plopDestroyed', handlePlopDestroyed);
       peers.unsubscribe('plopUpdated', handlePlopUpdated);
       session.unsubscribe('scenarioUpdated', handleScenarioUpdated);
     };
@@ -66,6 +72,10 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     session.placeAsset(plop);
   };
 
+  const handlePlopDestroy = (id: string) => {
+    peers.emitEvent('plopDestroyed', id);
+  };
+
   const handlePlopUpdate = (plop: Ploppable) => {
     peers.emitEvent('plopUpdated', plop);
   };
@@ -84,6 +94,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
               mapX={x}
               mapY={y}
               onPlop={handlePlop}
+              onPlopDestroy={handlePlopDestroy}
               onPlopUpdate={handlePlopUpdate}
               scale={scale}
             />

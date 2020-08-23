@@ -44,7 +44,7 @@ export default class PlopsStore {
     this.plops[id] = plop;
   };
 
-  public deletePlopById = (id: string): void => {
+  public destroyPlop = (id: string): void => {
     if (this.activePlop?.id === id) {
       this.activePlop = undefined;
     }
