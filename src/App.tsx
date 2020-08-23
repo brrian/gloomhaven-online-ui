@@ -30,10 +30,6 @@ const App: FC = () => {
     };
   }, [connection, history, initializeSession, subscribe, unsubscribe]);
 
-  useEffect(() => {
-    createSession();
-  }, [createSession]);
-
   const handleCreateClick = () => {
     if (connection) {
       return;

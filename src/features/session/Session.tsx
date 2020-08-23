@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useStore } from '../../store';
 import { SignalEvent } from '../peers/models';
 import Scenario from '../scenario/Scenario';
@@ -68,26 +68,9 @@ const Session: FC = () => {
   }, [id, peers, session]);
 
   return session.scenario ? (
-    <div>
-      <ul
-        style={{
-          position: 'absolute',
-          top: 75,
-          zIndex: 1000,
-        }}
-      >
-        {peers.peerConnections.map(peer => (
-          <li key={peer.connectionId}>{peer.connectionId}</li>
-        ))}
-      </ul>
-      <Scenario scenario={session.scenario} />
-    </div>
+    <Scenario scenario={session.scenario} />
   ) : (
-    <div>
-      no scenario
-      <br />
-      <Link to="/">Create session</Link>
-    </div>
+    <div>Loading...</div>
   );
 };
 
