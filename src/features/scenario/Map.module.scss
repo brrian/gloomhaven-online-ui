@@ -26,6 +26,20 @@
     z-index: 120;
   }
 
+  &[data-monsterLevel='elite'] {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: calc(70% - 50px);
+      left: calc(50% - 50px);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: orange;
+    }
+  }
+
   &.inTransit {
     filter: brightness(0.5) opacity(0.9);
   }

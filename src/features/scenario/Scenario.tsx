@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
 import { useStore } from '../../store';
 import { Ploppable } from '../plops/models';
+import MonsterPlopSelector from '../plops/MonsterPlopSelector';
 import Plopper from '../plops/Plopper';
 import PlopSelector from '../plops/PlopSelector';
 import { Asset, Scenario as IScenario } from '../session/models';
@@ -39,13 +40,22 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     };
   }, [peers, plops, session]);
 
-  const handleAssetMove = ({ assetId, id, rotation, type, x, y }: Asset) => {
+  const handleAssetMove = ({
+    assetId,
+    id,
+    meta,
+    rotation,
+    type,
+    x,
+    y,
+  }: Asset) => {
     session.updateAsset(id, {
       inTransit: true,
     });
 
     plops.createPlopper(type, assetId, {
       clonedFromAsset: id,
+      meta,
       x,
       y,
       rotation,
@@ -70,11 +80,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
         <>
           <div className={styles.ploppers}>
             <PlopSelector className={styles.select} label="tile" type="tiles" />
-            <PlopSelector
-              className={styles.select}
-              label="monster"
-              type="monsters"
-            />
+            <MonsterPlopSelector className={styles.select} />
             <PlopSelector
               className={styles.select}
               label="token"

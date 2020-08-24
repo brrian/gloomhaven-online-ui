@@ -7,6 +7,7 @@ export interface Asset {
   height: number;
   id: string;
   inTransit: boolean;
+  meta?: AssetMeta;
   name: string;
   rotation: number;
   type: AssetType;
@@ -16,6 +17,10 @@ export interface Asset {
 }
 
 export type AssetType = 'classes' | 'monsters' | 'tiles' | 'tokens';
+
+interface AssetMeta {
+  [key: string]: any;
+}
 
 type Connection = string;
 

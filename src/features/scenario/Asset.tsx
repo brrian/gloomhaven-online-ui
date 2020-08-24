@@ -10,7 +10,14 @@ interface AssetProps {
 }
 
 const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
-  const { assetId, name, rotation, type, x, y } = asset;
+  const { assetId, meta, name, rotation, type, x, y } = asset;
+
+  const dataAttrs = meta
+    ? Object.entries(meta).reduce(
+        (accAttrs, [key, value]) => ({ ...accAttrs, [`data-${key}`]: value }),
+        {}
+      )
+    : undefined;
 
   let orientation = '';
   if (type === 'monsters') {
@@ -30,6 +37,7 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
       data-type={type}
       onDoubleClick={onDoubleClick ? () => onDoubleClick(asset) : undefined}
       style={{ transform }}
+      {...dataAttrs}
     >
       <img alt={name} src={`/assets/${type}/${assetId}${orientation}.png`} />
     </div>
