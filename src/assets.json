@@ -483,6 +483,66 @@
       "height": 500
     },
     {
+      "id": "living-bones",
+      "name": "Living Bones",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "living-dead",
+      "name": "Living Dead",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "living-spirit",
+      "name": "Living Spirit",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "lurker",
+      "name": "Lurker",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "night-demon",
+      "name": "Night Demon",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "ooze",
+      "name": "Ooze",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "rending-drake",
+      "name": "Rending Drake",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "savaas-icestorm",
+      "name": "Savaas Icestorm",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "savaas-lavaflow",
+      "name": "Savaas Lavaflow",
+      "width": 500,
+      "height": 500
+    },
+    {
+      "id": "spitting-drake",
+      "name": "Spitting Drake",
+      "width": 500,
+      "height": 500
+    },
+    {
       "id": "stone-golem",
       "name": "Stone Golem",
       "width": 500,
