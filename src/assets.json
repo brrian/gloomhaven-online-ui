@@ -904,5 +904,109 @@
       "width": 204,
       "height": 230
     }
+  ],
+  "classes": [
+    {
+      "id": "brute",
+      "name": "Brute",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "cragheart",
+      "name": "Cragheart",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "mindthief",
+      "name": "Mindthief",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "scoundrel",
+      "name": "Scoundrel",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "spellweaver",
+      "name": "Spellweaver",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "tinkerer",
+      "name": "Tinkerer",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "beast-tyrant",
+      "name": "Beast Tyrant",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "doomstalker",
+      "name": "Doomstalker",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "elementalist",
+      "name": "Elementalist",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "nightshroud",
+      "name": "Nightshroud",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "plagueherald",
+      "name": "Plagueherald",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "quartermaster",
+      "name": "Quartermaster",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "sawbones",
+      "name": "Sawbones",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "soothsinger",
+      "name": "Soothsinger",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "summoner",
+      "name": "Summoner",
+      "width": 250,
+      "height": 250
+    },
+    {
+      "id": "sunkeeper",
+      "name": "Sunkeeper",
+      "width": 250,
+      "height": 250
+    }
   ]
 }

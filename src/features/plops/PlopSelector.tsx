@@ -1,14 +1,15 @@
-import React, { FC, ChangeEvent, useState } from 'react';
+import React, { FC, ChangeEvent, useState, memo } from 'react';
 import assets from '../../assets.json';
 import { AssetType } from '../session/models';
 import { usePlopsStore } from '../../store';
 
 interface PlopSelectorProps {
   className?: string;
+  label: string;
   type: AssetType;
 }
 
-const PlopSelector: FC<PlopSelectorProps> = ({ className, type }) => {
+const PlopSelector: FC<PlopSelectorProps> = ({ className, label, type }) => {
   const { createPlopper } = usePlopsStore();
 
   const [value, setValue] = useState(assets[type][0].id);
@@ -32,11 +33,9 @@ const PlopSelector: FC<PlopSelectorProps> = ({ className, type }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleButtonClick}>
-        Create {type.substring(0, type.length - 1)}
-      </button>
+      <button onClick={handleButtonClick}>Create {label}</button>
     </div>
   );
 };
 
-export default PlopSelector;
+export default memo(PlopSelector);

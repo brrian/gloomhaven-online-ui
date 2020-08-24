@@ -69,9 +69,22 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
       {({ isDragging, scale, x, y }) => (
         <>
           <div className={styles.ploppers}>
-            <PlopSelector className={styles.select} type="tiles" />
-            <PlopSelector className={styles.select} type="monsters" />
-            <PlopSelector className={styles.select} type="tokens" />
+            <PlopSelector className={styles.select} label="tile" type="tiles" />
+            <PlopSelector
+              className={styles.select}
+              label="monster"
+              type="monsters"
+            />
+            <PlopSelector
+              className={styles.select}
+              label="token"
+              type="tokens"
+            />
+            <PlopSelector
+              className={styles.select}
+              label="class"
+              type="classes"
+            />
           </div>
           {plops.activePlop && (
             <Plopper
