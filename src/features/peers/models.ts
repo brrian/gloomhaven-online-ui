@@ -1,12 +1,12 @@
 import { Instance, SignalData } from 'simple-peer';
+import { Connection } from '../session/models';
 
-export interface PeerConnection {
-  connectionId: string;
+export interface PeerConnection extends Connection {
   peer: Instance;
 }
 
 export interface SignalEvent {
-  connectionId: string;
+  connection: Connection;
   signal: SignalData;
 }
 

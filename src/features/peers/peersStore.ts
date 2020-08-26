@@ -1,5 +1,6 @@
 import { decorate, observable } from 'mobx';
 import Peer, { SignalData } from 'simple-peer';
+import { Connection } from '../session/models';
 import { Handler, PeerConnection, SignalEvent, Subscriptions } from './models';
 
 export default class PeersStore {
@@ -7,7 +8,7 @@ export default class PeersStore {
 
   private subscriptions: Subscriptions = {};
 
-  public createPeer = (targetConnection: string): void => {
+  public createPeer = (targetConnection: Connection): void => {
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -23,7 +24,7 @@ export default class PeersStore {
     peer.on('data', this.handleDataReceived);
 
     this.peerConnections.push({
-      connectionId: targetConnection,
+      ...targetConnection,
       peer,
     });
   };
@@ -34,30 +35,30 @@ export default class PeersStore {
         peerConnection.peer.send(JSON.stringify({ action, payload }));
       } catch (error) {
         this.peerConnections = this.peerConnections.filter(
-          ({ connectionId }) => connectionId !== peerConnection.connectionId
+          ({ id }) => id !== peerConnection.id
         );
       }
     }
   };
 
   public onReturnSignalReceived = ({
-    connectionId,
+    connection,
     signal,
   }: SignalEvent): void => {
     const peerConnection = this.peerConnections.find(
-      peerConnection => peerConnection.connectionId === connectionId
+      peerConnection => peerConnection.id === connection.id
     );
 
     peerConnection?.peer.signal(signal);
   };
 
-  public onSignalReceived = ({ connectionId, signal }: SignalEvent): void => {
-    this.addPeer(connectionId, signal);
+  public onSignalReceived = ({ connection, signal }: SignalEvent): void => {
+    this.addPeer(connection, signal);
   };
 
   public removePeer = (connectionId: string): void => {
     this.peerConnections = this.peerConnections.filter(
-      peerConnection => peerConnection.connectionId !== connectionId
+      peerConnection => peerConnection.id !== connectionId
     );
   };
 
@@ -79,7 +80,7 @@ export default class PeersStore {
     );
   };
 
-  private addPeer = (targetConnection: string, signal: SignalData) => {
+  private addPeer = (targetConnection: Connection, signal: SignalData) => {
     const peer = new Peer({
       initiator: false,
       trickle: false,
@@ -97,7 +98,7 @@ export default class PeersStore {
     peer.signal(signal);
 
     this.peerConnections.push({
-      connectionId: targetConnection,
+      ...targetConnection,
       peer,
     });
   };

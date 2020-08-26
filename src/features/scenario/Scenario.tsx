@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
 import { useStore } from '../../store';
+import Peers from '../peers/Peers';
 import { Ploppable } from '../plops/models';
 import MonsterPlopSelector from '../plops/MonsterPlopSelector';
 import Plopper from '../plops/Plopper';
@@ -90,6 +91,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     <Map assets={scenario.assets} onAssetMove={handleAssetMove}>
       {({ isDragging, scale, x, y }) => (
         <>
+          <Peers />
           <div className={styles.ploppers}>
             <PlopSelector className={styles.select} label="tile" type="tiles" />
             <MonsterPlopSelector className={styles.select} />

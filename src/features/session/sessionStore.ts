@@ -15,6 +15,8 @@ export default class SessionStore {
 
   public scenario?: Scenario;
 
+  public name = 'Unnamed User';
+
   private subscriptions: Subscriptions = {};
 
   public createSession = async (): Promise<void> => {
@@ -22,7 +24,7 @@ export default class SessionStore {
       await this.createConnection();
     }
 
-    this.emitEvent('createSession');
+    this.emitEvent('createSession', { name: this.name });
   };
 
   public destroyAsset = (id: string): void => {
@@ -64,7 +66,10 @@ export default class SessionStore {
 
     this.subscribe('sessionJoined', handleSessionJoined);
 
-    this.emitEvent('joinSession', { sessionId });
+    this.emitEvent('joinSession', {
+      name: this.name,
+      sessionId,
+    });
   };
 
   public placeAsset = (plop: Ploppable): void => {
@@ -127,6 +132,11 @@ export default class SessionStore {
         );
       }
 
+      const name = window.prompt('Insert name');
+      if (name) {
+        this.name = name;
+      }
+
       this.connection = new WebSocket(process.env.REACT_APP_WEBSOCKET_ENDPOINT);
 
       this.connection.addEventListener('open', () => resolve(), {
@@ -160,5 +170,6 @@ export default class SessionStore {
 
 decorate(SessionStore, {
   connection: observable,
+  name: observable,
   scenario: observable,
 });

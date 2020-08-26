@@ -22,7 +22,10 @@ interface AssetMeta {
   [key: string]: any;
 }
 
-type Connection = string;
+export interface Connection {
+  id: string;
+  name: string;
+}
 
 export interface Session {
   id: string;
