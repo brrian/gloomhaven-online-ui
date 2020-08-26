@@ -18,10 +18,6 @@
     z-index: 110;
   }
 
-  &[data-type='tiles'] {
-    pointer-events: none;
-  }
-
   &[data-type='tokens'] {
     z-index: 120;
   }
