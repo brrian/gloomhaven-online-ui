@@ -25,6 +25,16 @@ export default class SessionStore {
     this.emitEvent('createSession');
   };
 
+  public destroyAsset = (id: string): void => {
+    if (this.scenario?.assets[id]) {
+      delete this.scenario.assets[id];
+
+      this.emitEvent('updateScenario', {
+        scenario: this.scenario,
+      });
+    }
+  };
+
   public emitEvent = (action: string, payload: any = {}): void => {
     this.connection?.send(
       JSON.stringify({
@@ -135,7 +145,7 @@ export default class SessionStore {
     });
   };
 
-  private notifySubscriptions = (action: string, payload: any) => {
+  private notifySubscriptions = (action: string, payload: any): void => {
     const handlers = this.subscriptions[action];
 
     if (!handlers) {

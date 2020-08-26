@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { FC, MouseEvent, useEffect, useRef } from 'react';
+import React, { FC, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { usePlopsStore } from '../../store';
 import { Ploppable } from './models';
 import styles from './Plopper.module.scss';
@@ -9,7 +9,8 @@ interface PlopperProps {
   mapX: number;
   mapY: number;
   onPlop: (plop: Ploppable) => void;
-  onPlopDestroy?: (id: string) => void;
+  onPlopCancel?: (plop: Ploppable) => void;
+  onPlopDestroy?: (plop: Ploppable) => void;
   onPlopUpdate?: (plop: Ploppable) => void;
   scale: number;
 }
@@ -19,6 +20,7 @@ const Plopper: FC<PlopperProps> = ({
   mapX,
   mapY,
   onPlop,
+  onPlopCancel,
   onPlopDestroy,
   onPlopUpdate,
   scale,
@@ -26,6 +28,22 @@ const Plopper: FC<PlopperProps> = ({
   const rotationIndexRef = useRef(0);
 
   const { activePlop, destroyPlop, updatePlop } = usePlopsStore();
+
+  const cancelActivePlop = useCallback(() => {
+    if (activePlop) {
+      destroyPlop(activePlop.id);
+
+      onPlopCancel?.(activePlop);
+    }
+  }, [activePlop, destroyPlop, onPlopCancel]);
+
+  const destroyActivePlop = useCallback(() => {
+    if (activePlop) {
+      destroyPlop(activePlop.id);
+
+      onPlopDestroy?.(activePlop);
+    }
+  }, [activePlop, destroyPlop, onPlopDestroy]);
 
   useEffect(() => {
     const handleKeyDown = ({ key }: KeyboardEvent) => {
@@ -39,15 +57,31 @@ const Plopper: FC<PlopperProps> = ({
 
           onPlopUpdate?.(activePlop);
         }
+      } else if (key === 'Escape') {
+        cancelActivePlop();
+      } else if (key === 'Delete') {
+        destroyActivePlop();
       }
     };
 
+    const handleWindowUnload = () => {
+      cancelActivePlop();
+    };
+
     document.body.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('beforeunload', handleWindowUnload);
 
     return () => {
       document.body.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('beforeunload', handleWindowUnload);
     };
-  }, [activePlop, onPlopUpdate, updatePlop]);
+  }, [
+    activePlop,
+    cancelActivePlop,
+    destroyActivePlop,
+    onPlopUpdate,
+    updatePlop,
+  ]);
 
   const handleMouseMove = ({
     clientX,
@@ -67,9 +101,7 @@ const Plopper: FC<PlopperProps> = ({
     if (!isDragging && activePlop) {
       onPlop(activePlop);
 
-      destroyPlop(activePlop.id);
-
-      onPlopDestroy?.(activePlop.id);
+      destroyActivePlop();
     }
   };
 

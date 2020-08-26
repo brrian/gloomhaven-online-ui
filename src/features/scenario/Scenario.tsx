@@ -66,8 +66,20 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
     session.placeAsset(plop);
   };
 
-  const handlePlopDestroy = (id: string) => {
-    peers.emitEvent('plopDestroyed', id);
+  const handlePlopCancel = (plop: Ploppable) => {
+    peers.emitEvent('plopDestroyed', plop.id);
+
+    if (plop.clonedFromAsset) {
+      session.updateAsset(plop.clonedFromAsset, { inTransit: false });
+    }
+  };
+
+  const handlePlopDestroy = (plop: Ploppable) => {
+    peers.emitEvent('plopDestroyed', plop.id);
+
+    if (plop.clonedFromAsset) {
+      session.destroyAsset(plop.clonedFromAsset);
+    }
   };
 
   const handlePlopUpdate = (plop: Ploppable) => {
@@ -98,6 +110,7 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
               mapX={x}
               mapY={y}
               onPlop={handlePlop}
+              onPlopCancel={handlePlopCancel}
               onPlopDestroy={handlePlopDestroy}
               onPlopUpdate={handlePlopUpdate}
               scale={scale}
