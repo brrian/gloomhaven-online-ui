@@ -14,12 +14,16 @@
 }
 
 .asset {
-  &[data-type='monsters'] {
-    z-index: 110;
-  }
-
   &[data-type='tokens'] {
     z-index: 120;
+  }
+
+  &[data-type='monsters'] {
+    z-index: 120;
+  }
+
+  &[data-type='classes'] {
+    z-index: 130;
   }
 
   &[data-monsterLevel='elite'] {
