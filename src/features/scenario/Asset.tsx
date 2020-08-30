@@ -27,8 +27,6 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
   let transform = `translate(${x}px, ${y}px)`;
   if (type !== 'monsters') {
     transform += ` rotate(${rotation}deg)`;
-  } else {
-    transform += ' scale(.44)';
   }
 
   return (
