@@ -23,7 +23,7 @@ const MonsterPlopSelector: FC<MonsterPlopSelectorProps> = ({ className }) => {
   const handleButtonClick = () => {
     createPlopper('monsters', assetId, {
       meta: {
-        monsterlevel: level,
+        monsterLevel: level,
       },
     });
   };

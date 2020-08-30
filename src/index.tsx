@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 import { SESSION_PAGE } from './constants';
 import Session from './features/session/Session';
-import './index.css';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import { StoreContextProvider } from './store';
 

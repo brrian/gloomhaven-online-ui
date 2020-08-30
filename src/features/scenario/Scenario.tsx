@@ -1,3 +1,4 @@
+import { cloneDeep, set } from 'lodash-es';
 import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
 import { useStore } from '../../store';
@@ -9,6 +10,7 @@ import PlopSelector from '../plops/PlopSelector';
 import { Asset, Scenario as IScenario } from '../session/models';
 import Map from './Map';
 import styles from './Scenario.module.scss';
+import getMonsterCount from './util/getMonsterCount';
 
 interface ScenarioProps {
   scenario: IScenario;
@@ -64,7 +66,20 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
   };
 
   const handlePlop = (plop: Ploppable) => {
-    session.placeAsset(plop);
+    const asset = cloneDeep(plop);
+
+    if (plop.type === 'monsters' && !plop.meta?.monsterCount) {
+      const count = getMonsterCount(session.scenario?.assets, plop);
+      set(asset, 'meta.monsterCount', count);
+
+      if (count >= 10) {
+        set(asset, 'meta.monsterLargeCount', true);
+      }
+    }
+
+    delete asset.clonedFromAsset;
+
+    session.placeAsset(asset);
   };
 
   const handlePlopCancel = (plop: Ploppable) => {

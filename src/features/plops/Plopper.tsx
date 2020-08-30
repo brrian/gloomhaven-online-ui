@@ -1,3 +1,4 @@
+import { pick } from 'lodash-es';
 import { observer } from 'mobx-react-lite';
 import React, { FC, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { usePlopsStore } from '../../store';
@@ -27,7 +28,12 @@ const Plopper: FC<PlopperProps> = ({
 }) => {
   const rotationIndexRef = useRef(0);
 
-  const { activePlop, destroyPlop, updatePlop } = usePlopsStore();
+  const {
+    activePlop,
+    createPlopper,
+    destroyPlop,
+    updatePlop,
+  } = usePlopsStore();
 
   const cancelActivePlop = useCallback(() => {
     if (activePlop) {
@@ -97,9 +103,17 @@ const Plopper: FC<PlopperProps> = ({
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isDragging && activePlop) {
       onPlop(activePlop);
+
+      if (event.shiftKey) {
+        createPlopper(
+          activePlop.type,
+          activePlop.assetId,
+          pick(activePlop, ['rotation', 'x', 'y', 'meta.monsterLevel'])
+        );
+      }
 
       destroyActivePlop();
     }

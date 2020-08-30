@@ -20,24 +20,41 @@
 
   &[data-type='monsters'] {
     z-index: 120;
+
+    &[data-monster-count] {
+      &::after {
+        content: attr(data-monster-count);
+        display: flex;
+        position: absolute;
+        bottom: 22%;
+        left: calc(50% - 10px);
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--color-text);
+        border-radius: 50%;
+        background-color: var(--color-monsterBg);
+        color: var(--color-text);
+        font-weight: 600;
+      }
+
+      &[data-monster-level='elite'] {
+        &::after {
+          border-color: var(--color-text);
+          background-color: var(--color-monsterEliteBg);
+          color: var(--color-text);
+        }
+      }
+
+      &[data-monster-large-count] {
+        font-size: 12px;
+      }
+    }
   }
 
   &[data-type='classes'] {
     z-index: 130;
-  }
-
-  &[data-monsterLevel='elite'] {
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: calc(70% - 50px);
-      left: calc(50% - 50px);
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: orange;
-    }
   }
 
   &.inTransit {

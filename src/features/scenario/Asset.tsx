@@ -1,4 +1,5 @@
 import cc from 'classcat';
+import { kebabCase } from 'lodash-es';
 import React, { FC } from 'react';
 import { Asset as IAsset } from '../session/models';
 import styles from './Asset.module.scss';
@@ -14,7 +15,10 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
 
   const dataAttrs = meta
     ? Object.entries(meta).reduce(
-        (accAttrs, [key, value]) => ({ ...accAttrs, [`data-${key}`]: value }),
+        (accAttrs, [key, value]) => ({
+          ...accAttrs,
+          [`data-${kebabCase(key)}`]: value,
+        }),
         {}
       )
     : undefined;
