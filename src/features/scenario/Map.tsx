@@ -28,7 +28,7 @@ const Map: FC<MapProps> = ({ assets, children, onAssetMove }) => {
 
   const [{ scale, x, y }, set] = useSpring(() => ({
     config: config.stiff,
-    scale: 0.35,
+    scale: 0.6,
     x: 0,
     y: 0,
   }));
@@ -61,13 +61,23 @@ const Map: FC<MapProps> = ({ assets, children, onAssetMove }) => {
     { filterTaps: true }
   );
 
-  const handleContainerWheel = ({ deltaY }: WheelEvent<HTMLDivElement>) => {
-    const zoomDelta = deltaY * 0.008;
-    const newScale = scale.get() + zoomDelta;
+  const handleContainerWheel = ({
+    clientX,
+    clientY,
+    deltaY,
+  }: WheelEvent<HTMLDivElement>) => {
+    const zoomDelta = deltaY * 0.01;
+    const prevScale = scale.get();
+
+    const newScale = Math.min(Math.max(0.35, prevScale + zoomDelta), 1);
+
+    const mouseX = (clientX - x.get()) / prevScale;
+    const mouseY = (clientY - y.get()) / prevScale;
 
     set({
-      scale: Math.min(Math.max(0.2, newScale), 1),
-      immediate: true,
+      scale: newScale,
+      x: clientX - mouseX * newScale,
+      y: clientY - mouseY * newScale,
     });
   };
 
