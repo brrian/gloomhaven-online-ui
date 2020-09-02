@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../../store';
+import AttackDeck from '../attackDeck/AttackDeck';
 import { SignalEvent } from '../peers/models';
 import Scenario from '../scenario/Scenario';
 import { JoinedSession } from './models';
@@ -68,7 +69,10 @@ const Session: FC = () => {
   }, [id, peers, session]);
 
   return session.scenario ? (
-    <Scenario scenario={session.scenario} />
+    <>
+      <AttackDeck />
+      <Scenario scenario={session.scenario} />
+    </>
   ) : (
     <div>Loading...</div>
   );
