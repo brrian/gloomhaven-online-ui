@@ -2,24 +2,27 @@ import confetti from 'canvas-confetti';
 import React, { FC, useRef } from 'react';
 import { animated, useChain, useSpring } from 'react-spring';
 import styles from './AttackCard.module.scss';
-import { AttackCard as IAttackCard } from './models';
+import { AttackCardKey } from './models';
+import createAttackCard from './util/createAttackCard';
 
 /*
   1. https://github.com/react-spring/react-spring/issues/1102
 */
 
 interface AttackCardProps {
-  card?: IAttackCard;
+  cardKey?: AttackCardKey;
   onComplete: () => void;
+  user?: string;
 }
 
-const AttackCard: FC<AttackCardProps> = ({ card, onComplete }) => {
+const AttackCard: FC<AttackCardProps> = ({ cardKey, onComplete, user }) => {
+  const card = createAttackCard(cardKey);
+
   // Store the card in a ref, otherwise it disappears during <AttackReveal>'s
   // useTransition un-mount phase.
   const cardRef = useRef(card);
 
-  const { background, main, secondary, showContinue, user } =
-    cardRef.current ?? {};
+  const { background, main, secondary, showContinue } = cardRef.current ?? {};
 
   const isCrit = main ? ['scenario-bless', 'crit'].includes(main) : false;
   const isMiss = main ? ['scenario-curse', 'miss'].includes(main) : false;
@@ -60,7 +63,7 @@ const AttackCard: FC<AttackCardProps> = ({ card, onComplete }) => {
       }, 100);
     },
     onRest: () => {
-      setTimeout(onComplete, isCrit || isMiss ? 1500 : 600);
+      setTimeout(onComplete, isCrit || isMiss ? 1500 : 800);
     },
   });
 

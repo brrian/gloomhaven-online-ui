@@ -2,21 +2,21 @@ import React, { FC } from 'react';
 import { animated, useTransition } from 'react-spring';
 import AttackCard from './AttackCard';
 import styles from './AttackReveal.module.scss';
-import { AttackCard as IAttackCard } from './models';
+import { AttackReveal as IAttackReveal } from './models';
 
 /*
   1. https://github.com/react-spring/react-spring/issues/1102
 */
 
 interface AttackRevealProps {
-  card?: IAttackCard;
+  attackReveal?: IAttackReveal;
   onComplete: () => void;
 }
 
-const AttackReveal: FC<AttackRevealProps> = ({ card, onComplete }) => {
-  const overlayTransition = useTransition(!!card, {
+const AttackReveal: FC<AttackRevealProps> = ({ attackReveal, onComplete }) => {
+  const overlayTransition = useTransition(!!attackReveal, {
     config: {
-      duration: card ? 400 : 200,
+      duration: attackReveal ? 400 : 200,
     },
     enter: { opacity: 1 },
     from: { opacity: 0 },
@@ -27,7 +27,11 @@ const AttackReveal: FC<AttackRevealProps> = ({ card, onComplete }) => {
     (props, isVisible) =>
       isVisible && (
         <animated.div className={styles.overlay} style={props as any /* 1 */}>
-          <AttackCard card={card} onComplete={onComplete} />
+          <AttackCard
+            cardKey={attackReveal?.cardKey}
+            onComplete={onComplete}
+            user={attackReveal?.user}
+          />
         </animated.div>
       )
   );

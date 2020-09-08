@@ -1,17 +1,16 @@
-import { sample } from 'lodash-es';
 import React, { FC, useEffect, useState } from 'react';
 import { useStore } from '../../store';
 import AttackReveal from './AttackReveal';
-import { AttackCard } from './models';
+import { AttackReveal as IAttackReveal } from './models';
 
 const AttackDeck: FC = () => {
   const { session, peers } = useStore();
 
-  const [attackCard, setAttackCard] = useState<AttackCard>();
+  const [attackReveal, setAttackReveal] = useState<IAttackReveal>();
 
   useEffect(() => {
-    const handleAttackReveal = (payload: AttackCard) => {
-      setAttackCard(payload);
+    const handleAttackReveal = (payload: IAttackReveal) => {
+      setAttackReveal(payload);
     };
 
     peers.subscribe('revealAttack', handleAttackReveal);
@@ -22,22 +21,18 @@ const AttackDeck: FC = () => {
   }, [peers]);
 
   const handleAttackClick = () => {
-    const main =
-      sample(['bless', 'crit', 'curse', 'scenario-curse', 'scenario-bless']) ??
-      '';
-
-    const card: AttackCard = {
-      main,
+    const attackReveal = {
+      cardKey: 'crit|crit|continue',
       user: session.name,
-    };
+    } as IAttackReveal;
 
-    setAttackCard(card);
+    setAttackReveal(attackReveal);
 
-    peers.emitEvent('revealAttack', card);
+    peers.emitEvent('revealAttack', attackReveal);
   };
 
   const handleAttackRevealComplete = () => {
-    setAttackCard(undefined);
+    setAttackReveal(undefined);
   };
 
   return (
@@ -53,7 +48,10 @@ const AttackDeck: FC = () => {
       >
         Attack
       </button>
-      <AttackReveal card={attackCard} onComplete={handleAttackRevealComplete} />
+      <AttackReveal
+        attackReveal={attackReveal}
+        onComplete={handleAttackRevealComplete}
+      />
     </>
   );
 };
