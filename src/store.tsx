@@ -1,10 +1,12 @@
 import { useLocalStore } from 'mobx-react-lite';
 import React, { createContext, FC, useContext } from 'react';
+import AttackDeckStore from './features/attackDeck/attackDeckStore';
 import PeersStore from './features/peers/peersStore';
 import PlopsStore from './features/plops/plopsStore';
 import SessionStore from './features/session/sessionStore';
 
 interface StoreContext {
+  attackDeck: AttackDeckStore;
   peers: PeersStore;
   plops: PlopsStore;
   session: SessionStore;
@@ -22,6 +24,10 @@ export const useStore = (): StoreContext => {
   return store;
 };
 
+export const useAttackDeckStore = (): AttackDeckStore => {
+  return useStore().attackDeck;
+};
+
 export const usePeersStore = (): PeersStore => {
   return useStore().peers;
 };
@@ -36,6 +42,7 @@ export const useSessionStore = (): SessionStore => {
 
 export const StoreContextProvider: FC = ({ children }) => {
   const store = useLocalStore(() => ({
+    attackDeck: new AttackDeckStore(),
     peers: new PeersStore(),
     plops: new PlopsStore(),
     session: new SessionStore(),

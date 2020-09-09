@@ -11,3 +11,11 @@ export interface AttackReveal {
   cardKey: AttackCardKey;
   user: string;
 }
+
+export interface DeckState {
+  blessings: number;
+  curses: number;
+  remaining: number;
+  shouldShuffle: boolean;
+  total: number;
+}
