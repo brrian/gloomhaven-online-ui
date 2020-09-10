@@ -36,6 +36,7 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
   return (
     <div
       className={cc([styles.asset, className])}
+      data-asset={assetId}
       data-type={type}
       onDoubleClick={onDoubleClick ? () => onDoubleClick(asset) : undefined}
       style={{ transform }}

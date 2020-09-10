@@ -18,8 +18,13 @@
     z-index: 120;
   }
 
+  &[data-asset^='scenario'],
+  &[data-asset='coin'] {
+    z-index: 125;
+  }
+
   &[data-type='monsters'] {
-    z-index: 120;
+    z-index: 130;
 
     &[data-monster-count] {
       &::after {
@@ -54,7 +59,7 @@
   }
 
   &[data-type='classes'] {
-    z-index: 130;
+    z-index: 140;
   }
 
   &.inTransit {
