@@ -17,6 +17,8 @@ export default class SessionStore {
 
   public name = 'Unnamed User';
 
+  private retries = 0;
+
   private subscriptions: Subscriptions = {};
 
   public createSession = async (): Promise<void> => {
@@ -132,6 +134,12 @@ export default class SessionStore {
         );
       }
 
+      const handleConnectionOpen = () => {
+        this.retries = 0;
+
+        resolve();
+      };
+
       const name = window.prompt('Insert name');
       if (name) {
         this.name = name;
@@ -139,9 +147,11 @@ export default class SessionStore {
 
       this.connection = new WebSocket(process.env.REACT_APP_WEBSOCKET_ENDPOINT);
 
-      this.connection.addEventListener('open', () => resolve(), {
+      this.connection.addEventListener('open', handleConnectionOpen, {
         once: true,
       });
+
+      this.connection.addEventListener('close', this.handleConnectionClose);
 
       this.connection.addEventListener('message', event => {
         try {
@@ -153,6 +163,24 @@ export default class SessionStore {
         }
       });
     });
+  };
+
+  private handleConnectionClose = () => {
+    if (this.retries <= 10) {
+      this.retries += 1;
+
+      setTimeout(() => {
+        // eslint-disable-next-line no-console
+        console.log('Attempting to reconnect WebSocket connection...');
+
+        this.createConnection();
+      }, this.retries * 5000);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(
+        'Unable to reconnect WebSocket connection. Please refresh the page.'
+      );
+    }
   };
 
   private notifySubscriptions = (action: string, payload: any): void => {
