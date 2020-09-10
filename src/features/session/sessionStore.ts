@@ -15,7 +15,7 @@ export default class SessionStore {
 
   public scenario?: Scenario;
 
-  public name = 'Unnamed User';
+  public name?: string;
 
   private retries = 0;
 
@@ -140,9 +140,8 @@ export default class SessionStore {
         resolve();
       };
 
-      const name = window.prompt('Insert name');
-      if (name) {
-        this.name = name;
+      if (!this.name) {
+        this.name = window.prompt('Insert name') ?? 'Anonymous User';
       }
 
       this.connection = new WebSocket(process.env.REACT_APP_WEBSOCKET_ENDPOINT);
