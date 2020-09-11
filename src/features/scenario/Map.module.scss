@@ -23,12 +23,34 @@
     z-index: 125;
   }
 
+  &[data-type='summons'] {
+    z-index: 140;
+
+    &[data-asset-count] {
+      font-size: 14px;
+
+      &::after {
+        content: attr(data-asset-count);
+        position: absolute;
+        top: calc(50% - 2px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-textAlt);
+        font-weight: 600;
+      }
+
+      &[data-asset-large-count] {
+        font-size: 12px;
+      }
+    }
+  }
+
   &[data-type='monsters'] {
     z-index: 130;
 
-    &[data-monster-count] {
+    &[data-asset-count] {
       &::after {
-        content: attr(data-monster-count);
+        content: attr(data-asset-count);
         display: flex;
         position: absolute;
         bottom: 22%;
@@ -52,7 +74,7 @@
         }
       }
 
-      &[data-monster-large-count] {
+      &[data-asset-large-count] {
         font-size: 12px;
       }
     }

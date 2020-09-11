@@ -1,13 +1,13 @@
 import { Ploppable } from '../../plops/models';
 import { Assets } from '../../session/models';
 
-export default function getMonsterCount(
+export default function getAssetCount(
   assets: Assets = {},
   plop: Ploppable
 ): number {
   const counts = Object.values(assets).reduce((accCounts, asset) => {
-    if (asset.type === 'monsters' && asset.assetId === plop.assetId) {
-      const foundCount = asset.meta?.monsterCount;
+    if (asset.assetId === plop.assetId) {
+      const foundCount = asset.meta?.assetCount;
 
       if (foundCount) {
         accCounts.add(foundCount);

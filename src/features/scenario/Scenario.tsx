@@ -10,7 +10,7 @@ import PlopSelector from '../plops/PlopSelector';
 import { Asset, Scenario as IScenario } from '../session/models';
 import Map from './Map';
 import styles from './Scenario.module.scss';
-import getMonsterCount from './util/getMonsterCount';
+import getAssetCount from './util/getAssetCount';
 
 interface ScenarioProps {
   scenario: IScenario;
@@ -68,12 +68,12 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
   const handlePlop = (plop: Ploppable) => {
     const asset = cloneDeep(plop);
 
-    if (plop.type === 'monsters' && !plop.meta?.monsterCount) {
-      const count = getMonsterCount(session.scenario?.assets, plop);
-      set(asset, 'meta.monsterCount', count);
+    if (['monsters', 'summons'].includes(plop.type) && !plop.meta?.assetCount) {
+      const count = getAssetCount(session.scenario?.assets, plop);
+      set(asset, 'meta.assetCount', count);
 
       if (count >= 10) {
-        set(asset, 'meta.monsterLargeCount', true);
+        set(asset, 'meta.assetLargeCount', true);
       }
     }
 
@@ -119,6 +119,11 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
               className={styles.select}
               label="class"
               type="classes"
+            />
+            <PlopSelector
+              className={styles.select}
+              label="summon"
+              type="summons"
             />
           </div>
           {plops.activePlop && (

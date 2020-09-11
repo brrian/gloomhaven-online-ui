@@ -16,7 +16,7 @@ export interface Asset {
   y: number;
 }
 
-export type AssetType = 'classes' | 'monsters' | 'tiles' | 'tokens';
+export type AssetType = 'classes' | 'monsters' | 'summons' | 'tiles' | 'tokens';
 
 interface AssetMeta {
   [key: string]: any;

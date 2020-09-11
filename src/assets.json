@@ -1,4 +1,370 @@
 {
+  "classes": [
+    {
+      "id": "brute",
+      "name": "Brute",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "cragheart",
+      "name": "Cragheart",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "mindthief",
+      "name": "Mindthief",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "scoundrel",
+      "name": "Scoundrel",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "spellweaver",
+      "name": "Spellweaver",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "tinkerer",
+      "name": "Tinkerer",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "beast-tyrant",
+      "name": "Beast Tyrant",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "doomstalker",
+      "name": "Doomstalker",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "elementalist",
+      "name": "Elementalist",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "nightshroud",
+      "name": "Nightshroud",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "plagueherald",
+      "name": "Plagueherald",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "quartermaster",
+      "name": "Quartermaster",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "sawbones",
+      "name": "Sawbones",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "soothsinger",
+      "name": "Soothsinger",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "summoner",
+      "name": "Summoner",
+      "width": 150,
+      "height": 150
+    },
+    {
+      "id": "sunkeeper",
+      "name": "Sunkeeper",
+      "width": 150,
+      "height": 150
+    }
+  ],
+  "monsters": [
+    {
+      "id": "ancient-artillery",
+      "name": "Ancient Artillery",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "bandit-archer",
+      "name": "Bandit Archer",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "bandit-guard",
+      "name": "Bandit Guard",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "black-imp",
+      "name": "Black Imp",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "cave-bear",
+      "name": "Cave Bear",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "city-archer",
+      "name": "City Archer",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "city-guard",
+      "name": "City Guard",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "cultist",
+      "name": "Cultist",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "deep-terror",
+      "name": "Deep Terror",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "earth-demon",
+      "name": "Earth Demon",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "flame-demon",
+      "name": "Flame Demon",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "forest-imp",
+      "name": "Forest Imp",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "frost-demon",
+      "name": "Frost Demon",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "giant-viper",
+      "name": "Giant Viper",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "harrower-infester",
+      "name": "Harrower Infester",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "hound",
+      "name": "Hound",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "inox-archer",
+      "name": "Inox Archer",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "inox-bodyguard",
+      "name": "Inox Bodyguard",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "inox-guard",
+      "name": "Inox Guard",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "inox-shaman",
+      "name": "Inox Shaman",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "living-bones",
+      "name": "Living Bones",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "living-dead",
+      "name": "Living Dead",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "living-spirit",
+      "name": "Living Spirit",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "lurker",
+      "name": "Lurker",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "night-demon",
+      "name": "Night Demon",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "ooze",
+      "name": "Ooze",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "rending-drake",
+      "name": "Rending Drake",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "savaas-icestorm",
+      "name": "Savaas Icestorm",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "savaas-lavaflow",
+      "name": "Savaas Lavaflow",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "spitting-drake",
+      "name": "Spitting Drake",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "stone-golem",
+      "name": "Stone Golem",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "sun-demon",
+      "name": "Sun Demon",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "vermling-scout",
+      "name": "Vermling Scout",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "vermling-shaman",
+      "name": "Vermling Shaman",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "id": "wind-demon",
+      "name": "Wind Demon",
+      "width": 130,
+      "height": 130
+    }
+  ],
+  "summons": [
+    {
+      "id": "summons-blue",
+      "name": "Summons (Blue)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-green",
+      "name": "Summons (Green)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-orange",
+      "name": "Summons (Orange)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-purple",
+      "name": "Summons (Purple)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-red",
+      "name": "Summons (Red)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-violet",
+      "name": "Summons (Violet)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-white",
+      "name": "Summons (White)",
+      "width": 110,
+      "height": 110
+    },
+    {
+      "id": "summons-yellow",
+      "name": "Summons (Yellow)",
+      "width": 110,
+      "height": 110
+    }
+  ],
   "tiles": [
     {
       "id": "a1a",
@@ -359,218 +725,6 @@
       "name": "n1b",
       "width": 1001,
       "height": 876
-    }
-  ],
-  "monsters": [
-    {
-      "id": "ancient-artillery",
-      "name": "Ancient Artillery",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "bandit-archer",
-      "name": "Bandit Archer",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "bandit-guard",
-      "name": "Bandit Guard",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "black-imp",
-      "name": "Black Imp",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "cave-bear",
-      "name": "Cave Bear",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "city-archer",
-      "name": "City Archer",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "city-guard",
-      "name": "City Guard",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "cultist",
-      "name": "Cultist",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "deep-terror",
-      "name": "Deep Terror",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "earth-demon",
-      "name": "Earth Demon",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "flame-demon",
-      "name": "Flame Demon",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "forest-imp",
-      "name": "Forest Imp",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "frost-demon",
-      "name": "Frost Demon",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "giant-viper",
-      "name": "Giant Viper",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "harrower-infester",
-      "name": "Harrower Infester",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "hound",
-      "name": "Hound",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "inox-archer",
-      "name": "Inox Archer",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "inox-bodyguard",
-      "name": "Inox Bodyguard",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "inox-guard",
-      "name": "Inox Guard",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "inox-shaman",
-      "name": "Inox Shaman",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "living-bones",
-      "name": "Living Bones",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "living-dead",
-      "name": "Living Dead",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "living-spirit",
-      "name": "Living Spirit",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "lurker",
-      "name": "Lurker",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "night-demon",
-      "name": "Night Demon",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "ooze",
-      "name": "Ooze",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "rending-drake",
-      "name": "Rending Drake",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "savaas-icestorm",
-      "name": "Savaas Icestorm",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "savaas-lavaflow",
-      "name": "Savaas Lavaflow",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "spitting-drake",
-      "name": "Spitting Drake",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "stone-golem",
-      "name": "Stone Golem",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "sun-demon",
-      "name": "Sun Demon",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "vermling-scout",
-      "name": "Vermling Scout",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "vermling-shaman",
-      "name": "Vermling Shaman",
-      "width": 130,
-      "height": 130
-    },
-    {
-      "id": "wind-demon",
-      "name": "Wind Demon",
-      "width": 130,
-      "height": 130
     }
   ],
   "tokens": [
@@ -963,110 +1117,6 @@
       "name": "Wood Door Opened",
       "width": 118,
       "height": 133
-    }
-  ],
-  "classes": [
-    {
-      "id": "brute",
-      "name": "Brute",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "cragheart",
-      "name": "Cragheart",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "mindthief",
-      "name": "Mindthief",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "scoundrel",
-      "name": "Scoundrel",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "spellweaver",
-      "name": "Spellweaver",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "tinkerer",
-      "name": "Tinkerer",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "beast-tyrant",
-      "name": "Beast Tyrant",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "berserker",
-      "name": "Berserker",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "doomstalker",
-      "name": "Doomstalker",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "elementalist",
-      "name": "Elementalist",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "nightshroud",
-      "name": "Nightshroud",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "plagueherald",
-      "name": "Plagueherald",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "quartermaster",
-      "name": "Quartermaster",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "sawbones",
-      "name": "Sawbones",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "soothsinger",
-      "name": "Soothsinger",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "summoner",
-      "name": "Summoner",
-      "width": 150,
-      "height": 150
-    },
-    {
-      "id": "sunkeeper",
-      "name": "Sunkeeper",
-      "width": 150,
-      "height": 150
     }
   ]
 }
