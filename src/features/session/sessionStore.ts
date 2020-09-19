@@ -16,7 +16,7 @@ export default class SessionStore {
 
   public scenario?: Scenario;
 
-  public name?: string;
+  public name? = process.env.REACT_APP_DEFAULT_USER;
 
   private retries = 0;
 
