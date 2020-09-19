@@ -18,6 +18,8 @@ export default class SessionStore {
 
   public name? = process.env.REACT_APP_DEFAULT_USER;
 
+  private heartBeatInterval?: number;
+
   private retries = 0;
 
   private subscriptions: Subscriptions = {};
@@ -138,6 +140,12 @@ export default class SessionStore {
       const handleConnectionOpen = () => {
         this.retries = 0;
 
+        const timeout = 1000 * 60 * 8; // 8 minutes
+
+        this.heartBeatInterval = window.setInterval(() => {
+          this.emitEvent('ping');
+        }, timeout);
+
         resolve();
       };
 
@@ -166,6 +174,10 @@ export default class SessionStore {
   };
 
   private handleConnectionClose = () => {
+    if (this.heartBeatInterval) {
+      window.clearInterval(this.heartBeatInterval);
+    }
+
     if (this.retries <= 10) {
       this.retries += 1;
 
