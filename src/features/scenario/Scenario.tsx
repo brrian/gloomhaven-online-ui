@@ -77,8 +77,6 @@ const Scenario: FC<ScenarioProps> = ({ scenario }) => {
       }
     }
 
-    delete asset.clonedFromAsset;
-
     session.placeAsset(asset);
   };
 

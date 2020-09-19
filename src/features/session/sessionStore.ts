@@ -1,3 +1,4 @@
+import { omit } from 'lodash-es';
 import { decorate, observable } from 'mobx';
 import { Ploppable } from '../plops/models';
 import {
@@ -77,7 +78,7 @@ export default class SessionStore {
   public placeAsset = (plop: Ploppable): void => {
     if (this.scenario) {
       this.scenario.assets[plop.id] = {
-        ...plop,
+        ...omit(plop, 'clonedFromAsset'),
         inTransit: false,
       };
 
@@ -100,7 +101,7 @@ export default class SessionStore {
   };
 
   public updateAsset = (id: string, updates: Partial<Ploppable>): void => {
-    if (this.scenario) {
+    if (this.scenario && !!this.scenario.assets[id]) {
       this.scenario.assets[id] = {
         ...this.scenario.assets[id],
         ...updates,
