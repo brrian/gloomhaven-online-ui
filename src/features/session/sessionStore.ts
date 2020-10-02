@@ -140,7 +140,7 @@ export default class SessionStore {
       const handleConnectionOpen = () => {
         this.retries = 0;
 
-        const timeout = 1000 * 60 * 8; // 8 minutes
+        const timeout = 1000 * 55; // 55 seconds
 
         this.heartBeatInterval = window.setInterval(() => {
           this.emitEvent('ping');
