@@ -66,10 +66,11 @@ const Map: FC<MapProps> = ({ assets, children, onAssetMove }) => {
     clientY,
     deltaY,
   }: WheelEvent<HTMLDivElement>) => {
-    const zoomDelta = deltaY * 0.01;
+    const zoomDelta = Math.max(Math.min(20, deltaY), -20) * 0.01;
+
     const prevScale = scale.get();
 
-    const newScale = Math.min(Math.max(0.35, prevScale + zoomDelta), 1);
+    const newScale = Math.min(Math.max(0.4, prevScale + zoomDelta), 1);
 
     const mouseX = (clientX - x.get()) / prevScale;
     const mouseY = (clientY - y.get()) / prevScale;
