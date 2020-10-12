@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
-import { SESSION_PAGE } from './constants';
+import { PERKS_PAGE, SESSION_PAGE } from './constants';
+import Perks from './features/perks/Perks';
 import Session from './features/session/Session';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
@@ -14,12 +15,9 @@ ReactDOM.render(
     <StoreContextProvider>
       <Router>
         <Switch>
-          <Route path={`/${SESSION_PAGE}/:id`}>
-            <Session />
-          </Route>
-          <Route path="/">
-            <App />
-          </Route>
+          <Route path={`/${SESSION_PAGE}/:id`} component={Session} />
+          <Route path={`/${PERKS_PAGE}`} component={Perks} />
+          <Route path="/" component={App} />
         </Switch>
       </Router>
     </StoreContextProvider>

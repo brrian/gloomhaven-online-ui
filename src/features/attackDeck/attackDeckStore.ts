@@ -1,5 +1,7 @@
 import { random, shuffle } from 'lodash-es';
 import { decorate, observable } from 'mobx';
+import { Perks } from '../perks/models';
+import perksSchemas from '../perks/perksSchemas';
 
 interface DeckCounts {
   [key: string]: number;
@@ -30,17 +32,23 @@ export default class AttackDeckStore {
 
   public constructor() {
     const savedDeckItem = localStorage.getItem('attackDeck');
-
     if (savedDeckItem) {
       const savedDeck = JSON.parse(savedDeckItem);
 
       this.blessings = savedDeck.blessings ?? 0;
       this.curses = savedDeck.curses ?? 0;
       this.deck = savedDeck.deck ?? [];
-      this.perks = savedDeck.perks ?? {};
       this.shouldShuffle = savedDeck.shouldShuffle ?? false;
       this.used = savedDeck.used ?? [];
-    } else {
+    }
+
+    const perksItem = localStorage.getItem('perks');
+    if (perksItem) {
+      const perks = JSON.parse(perksItem);
+      this.buildPerks(perks);
+    }
+
+    if (this.deck.length === 0) {
       this.buildDeck();
     }
   }
@@ -140,6 +148,29 @@ export default class AttackDeckStore {
     this.saveDeck();
   };
 
+  private buildPerks = (perks: Perks): void => {
+    const perksSchema = perksSchemas[perks.class];
+
+    for (const [id, checks] of Object.entries(perks.perks)) {
+      const perksSet = perksSchema.find(set => set.id === id);
+
+      if (!perksSet) {
+        throw new Error(`Unable to to find perks matching ${id}`);
+      }
+
+      // Repeat for however many checks we have
+      for (let index = 0; index < checks; index++) {
+        for (const [card, count] of Object.entries(perksSet.perks)) {
+          if (!this.perks[card]) {
+            this.perks[card] = 0;
+          }
+
+          this.perks[card] += count;
+        }
+      }
+    }
+  };
+
   private saveDeck = () => {
     localStorage.setItem(
       'attackDeck',
@@ -147,7 +178,6 @@ export default class AttackDeckStore {
         blessings: this.blessings,
         curses: this.curses,
         deck: this.deck,
-        perks: this.perks,
         shouldShuffle: this.shouldShuffle,
         used: this.used,
       })
