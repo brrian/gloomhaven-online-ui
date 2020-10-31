@@ -1,6 +1,7 @@
 import confetti from 'canvas-confetti';
 import React, { FC, useRef } from 'react';
 import { animated, useChain, useSpring } from 'react-spring';
+import attackDeck from './assets';
 import styles from './AttackCard.module.scss';
 import { AttackCardKey } from './models';
 import createAttackCard from './util/createAttackCard';
@@ -88,20 +89,16 @@ const AttackCard: FC<AttackCardProps> = ({ cardKey, onComplete, user }) => {
         data-background={background}
         style={backStyles}
       >
-        <img alt="" src={`/assets/attack-deck/${main}.png`} />
+        {main && <img alt="" src={attackDeck[main]} />}
         {secondary && (
           <img
             alt=""
             className={styles.secondary}
-            src={`/assets/attack-deck/${secondary}.png`}
+            src={attackDeck[secondary]}
           />
         )}
         {showContinue && (
-          <img
-            alt=""
-            className={styles.continue}
-            src={`/assets/attack-deck/continue.png`}
-          />
+          <img alt="" className={styles.continue} src={attackDeck.continue} />
         )}
       </animated.div>
     </animated.div>

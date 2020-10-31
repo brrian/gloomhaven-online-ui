@@ -32,16 +32,16 @@ $colors: 'blue', 'gray', 'soft-green', 'green', 'orange', 'soft-purple',
   }
 
   .front {
-    background-image: url('/assets/attack-deck/front.jpg');
+    background-image: url('./assets/front.jpg');
   }
 
   .back {
     transform: rotateX(180deg);
-    background-image: url('/assets/attack-deck/blank.jpg');
+    background-image: url('./assets/blank.jpg');
 
     @each $color in $colors {
       &[data-background='#{$color}'] {
-        background-image: url('/assets/attack-deck/blank-#{$color}.jpg');
+        background-image: url('./assets/blank-#{$color}.jpg');
       }
     }
   }

@@ -3,6 +3,7 @@ import { kebabCase } from 'lodash-es';
 import React, { FC } from 'react';
 import { Asset as IAsset } from '../session/models';
 import styles from './Asset.module.scss';
+import getAssetSrc from './util/getAssetSrc';
 
 interface AssetProps {
   asset: IAsset;
@@ -23,15 +24,12 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
       )
     : undefined;
 
-  let orientation = '';
-  if (type === 'monsters') {
-    orientation = rotation % 60 === 0 ? '-h' : '-v';
-  }
-
   let transform = `translate(${x}px, ${y}px)`;
   if (type !== 'monsters') {
     transform += ` rotate(${rotation}deg)`;
   }
+
+  const src = getAssetSrc(asset);
 
   return (
     <div
@@ -42,7 +40,7 @@ const Asset: FC<AssetProps> = ({ asset, className, onDoubleClick }) => {
       style={{ transform }}
       {...dataAttrs}
     >
-      <img alt={name} src={`/assets/${type}/${assetId}${orientation}.png`} />
+      <img alt={name} src={src} />
     </div>
   );
 };
